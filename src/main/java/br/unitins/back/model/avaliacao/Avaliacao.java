@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import br.unitins.back.model.DefaultEntity;
 import br.unitins.back.model.placa_de_video.PlacaDeVideo;
+import br.unitins.back.model.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +16,9 @@ import jakarta.persistence.PrePersist;
 @Entity
 public class Avaliacao extends DefaultEntity {
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
     @ManyToOne
     @JoinColumn(name = "id_placa_de_video", nullable = false)
     private PlacaDeVideo placaDeVideo;
@@ -59,6 +63,14 @@ public class Avaliacao extends DefaultEntity {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

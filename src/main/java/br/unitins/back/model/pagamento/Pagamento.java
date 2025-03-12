@@ -8,6 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.PrePersist;
@@ -22,6 +24,9 @@ public abstract class Pagamento extends DefaultEntity {
 
     @Column(nullable = false)
     private BigDecimal valorPago;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento status;
 
     @PrePersist
     protected void onCreate() {
@@ -44,6 +49,14 @@ public abstract class Pagamento extends DefaultEntity {
 
     public void setValorPago(BigDecimal valorPago) {
         this.valorPago = valorPago;
+    }
+
+    public StatusPagamento getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPagamento status) {
+        this.status = status;
     }
 
 }
