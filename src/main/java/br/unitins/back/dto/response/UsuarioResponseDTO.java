@@ -23,8 +23,10 @@ public record UsuarioResponseDTO(
                 usuario.getEmail(),
                 usuario.getLogin(),
                 usuario.getPerfil(),
-                usuario.getTelefones().stream().map(TelefoneDTO::valueOf).toList(),
-                usuario.getEnderecos().stream().map(EnderecoDTO::valueOf).toList()
+                usuario.getTelefones().stream()
+                        .map(t -> TelefoneDTO.valueOf(t)).toList(),
+                usuario.getEnderecos().stream()
+                        .map(t -> EnderecoDTO.valueOf(t)).toList()
         );
     }
 }

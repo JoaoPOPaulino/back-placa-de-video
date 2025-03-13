@@ -1,7 +1,6 @@
 package br.unitins.back.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.unitins.back.model.placa_de_video.PlacaDeVideo;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
@@ -14,7 +13,7 @@ public class PlacaDeVideoRepository implements PanacheRepository<PlacaDeVideo> {
         return find("UPPER(nome) LIKE UPPER(?1)", "%" + nome + "%").list();
     }
 
-    public Optional<PlacaDeVideo> findByMarca(String marca) {
-        return find("UPPER(marca) LIKE UPPER(?1)", "%" + marca + "%").firstResultOptional();
+    public PlacaDeVideo findByMarca(String marca) {
+        return find("UPPER(marca) LIKE UPPER(?1)", "%" + marca + "%").firstResult();
     }
 }

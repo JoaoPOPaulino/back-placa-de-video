@@ -50,7 +50,30 @@ public class Usuario extends DefaultEntity {
         this.email = dto.email();
         this.login = dto.login();
         this.senha = hashService.getHashSenha(dto.senha());
-        this.perfil = Perfil.valueOf(dto.perfil().getId());
+        this.perfil = Perfil.valueOf(dto.idPerfil());
+
+        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+            this.telefones = dto.telefones().stream()
+                    .map(Telefone::new)
+                    .collect(Collectors.toList());
+        }
+
+        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+            this.enderecos = dto.enderecos().stream()
+                    .map(Endereco::new)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public void atualizarComDTO(UsuarioDTO dto, HashService hashService) {
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.login = dto.login();
+
+        if (dto.senha() != null && !dto.senha().isEmpty()) {
+            this.senha = hashService.getHashSenha(dto.senha());
+        }
+        this.perfil = Perfil.valueOf(dto.idPerfil());
 
         if (dto.telefones() != null && !dto.telefones().isEmpty()) {
             this.telefones = dto.telefones().stream()

@@ -14,6 +14,6 @@ public class PagamentoRepository implements PanacheRepository<Pagamento> {
     }
 
     public List<Pagamento> findByStatus(String status) {
-        return find("status = ?1", status).list();
+        return find("UPPER(status) LIKE UPPER(?1)", "%" + status + "%").list();
     }
 }

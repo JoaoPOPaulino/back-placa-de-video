@@ -2,7 +2,6 @@ package br.unitins.back.dto.request.usuario;
 
 import java.util.List;
 
-import br.unitins.back.model.usuario.Perfil;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,7 +18,7 @@ public record UsuarioDTO(
         @NotBlank(message = "A senha não pode ser vazia.")
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres.")
         String senha,
-        Perfil perfil,
+        Integer idPerfil,
         @NotEmpty(message = "O usuário deve ter pelo menos um telefone.")
         List<TelefoneDTO> telefones,
         @NotEmpty(message = "O usuário deve ter pelo menos um endereço.")
