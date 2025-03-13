@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.back.dto.request.usuario.EnderecoDTO;
 import br.unitins.back.dto.request.usuario.TelefoneDTO;
+import br.unitins.back.model.usuario.Perfil;
 import br.unitins.back.model.usuario.Usuario;
 
 public record UsuarioResponseDTO(
@@ -11,7 +12,7 @@ public record UsuarioResponseDTO(
         String nome,
         String email,
         String login,
-        String perfil,
+        Perfil perfil,
         List<TelefoneDTO> telefones,
         List<EnderecoDTO> enderecos) {
 
@@ -21,7 +22,7 @@ public record UsuarioResponseDTO(
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getLogin(),
-                usuario.getPerfil().getLabel(),
+                usuario.getPerfil(),
                 usuario.getTelefones().stream().map(TelefoneDTO::valueOf).toList(),
                 usuario.getEnderecos().stream().map(EnderecoDTO::valueOf).toList()
         );

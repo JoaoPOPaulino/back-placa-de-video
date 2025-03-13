@@ -13,7 +13,8 @@ public record PlacaDeVideoResponseDTO(
         String nomeImagem,
         EspecificacaoTecnicaDTO especificacaoTecnica,
         FabricanteDTO fabricante,
-        String categoria) {
+        String categoria,
+        Integer estoque) {
 
     public static PlacaDeVideoResponseDTO valueOf(PlacaDeVideo placa) {
         return new PlacaDeVideoResponseDTO(
@@ -23,7 +24,8 @@ public record PlacaDeVideoResponseDTO(
                 placa.getNomeImagem(),
                 EspecificacaoTecnicaDTO.valueOf(placa.getEspecificacaoTecnica()),
                 FabricanteDTO.valueOf(placa.getFabricante()),
-                placa.getCategoria().getLabel()
+                placa.getCategoria().getLabel(),
+                placa.getEstoque()
         );
     }
 

@@ -1,6 +1,7 @@
 package br.unitins.back.validation;
 
-public class ValidationException extends RuntimeException{
+public class ValidationException extends RuntimeException {
+
     private String fieldName;
 
     public ValidationException(String fieldName, String message) {

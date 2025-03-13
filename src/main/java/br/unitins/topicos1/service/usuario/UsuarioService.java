@@ -1,4 +1,4 @@
-package br.unitins.back.service.usuario;
+package br.unitins.topicos1.service.usuario;
 
 import java.util.List;
 
@@ -23,4 +23,5 @@ public interface UsuarioService {
     UsuarioResponseDTO findByLoginAndSenha(String login, String senha);
 
     UsuarioResponseDTO findByLogin(String login);
+
 }

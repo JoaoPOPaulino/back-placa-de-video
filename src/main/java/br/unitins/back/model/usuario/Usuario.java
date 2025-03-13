@@ -1,8 +1,11 @@
 package br.unitins.back.model.usuario;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.model.DefaultEntity;
+import br.unitins.back.service.hash.HashService;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -42,14 +45,24 @@ public class Usuario extends DefaultEntity {
 
     }
 
-    public Usuario(String nome, String email, String login, String senha, Perfil perfil, List<Telefone> telefones, List<Endereco> enderecos) {
-        this.nome = nome;
-        this.email = email;
-        this.login = login;
-        this.senha = senha;
-        this.perfil = perfil;
-        this.telefones = telefones;
-        this.enderecos = enderecos;
+    public Usuario(UsuarioDTO dto, HashService hashService) {
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.login = dto.login();
+        this.senha = hashService.getHashSenha(dto.senha());
+        this.perfil = Perfil.valueOf(dto.perfil().getId());
+
+        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+            this.telefones = dto.telefones().stream()
+                    .map(Telefone::new)
+                    .collect(Collectors.toList());
+        }
+
+        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+            this.enderecos = dto.enderecos().stream()
+                    .map(Endereco::new)
+                    .collect(Collectors.toList());
+        }
     }
 
     public String getNome() {
