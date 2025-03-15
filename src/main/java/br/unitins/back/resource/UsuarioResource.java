@@ -3,7 +3,7 @@ package br.unitins.back.resource;
 import org.jboss.logging.Logger;
 
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
-import br.unitins.topicos1.service.usuario.UsuarioService;
+import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

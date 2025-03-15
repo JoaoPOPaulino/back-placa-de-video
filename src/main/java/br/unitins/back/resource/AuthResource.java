@@ -4,7 +4,7 @@ import br.unitins.back.dto.LoginDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
 import br.unitins.back.service.hash.HashService;
 import br.unitins.back.service.jwt.JwtService;
-import br.unitins.topicos1.service.usuario.UsuarioService;
+import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
