@@ -7,4 +7,8 @@ public record FabricanteDTO(String nome) {
     public static FabricanteDTO valueOf(Fabricante fabricante) {
         return new FabricanteDTO(fabricante.getNome());
     }
+
+    public String getNome() {
+        return nome;
+    }
 }
