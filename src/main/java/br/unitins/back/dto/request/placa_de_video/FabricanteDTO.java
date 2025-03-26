@@ -1,14 +1,9 @@
 package br.unitins.back.dto.request.placa_de_video;
 
-import br.unitins.back.model.placa_de_video.Fabricante;
+import jakarta.validation.constraints.NotNull;
 
-public record FabricanteDTO(String nome) {
+public record FabricanteDTO(
+        @NotNull(message = "O fabricante não pode ser nulo.")
+        String nome) {
 
-    public static FabricanteDTO valueOf(Fabricante fabricante) {
-        return new FabricanteDTO(fabricante.getNome());
-    }
-
-    public String getNome() {
-        return nome;
-    }
 }

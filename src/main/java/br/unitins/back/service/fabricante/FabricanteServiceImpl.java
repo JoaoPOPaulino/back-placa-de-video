@@ -3,11 +3,13 @@ package br.unitins.back.service.fabricante;
 import java.util.List;
 
 import br.unitins.back.dto.request.placa_de_video.FabricanteDTO;
+import br.unitins.back.dto.response.FabricanteResponseDTO;
 import br.unitins.back.model.placa_de_video.Fabricante;
 import br.unitins.back.repository.FabricanteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class FabricanteServiceImpl implements FabricanteService {
@@ -17,21 +19,21 @@ public class FabricanteServiceImpl implements FabricanteService {
 
     @Override
     @Transactional
-    public Fabricante create(FabricanteDTO fabricante) {
-        Fabricante novoFabricante = new Fabricante();
-        novoFabricante.setNome(fabricante.getNome());
-
+    public FabricanteResponseDTO create(FabricanteDTO dto) {
+        Fabricante novoFabricante = new Fabricante(dto);
         fabricanteRepository.persist(novoFabricante);
-
-        return novoFabricante;
+        return FabricanteResponseDTO.valueOf(novoFabricante);
     }
 
     @Override
     @Transactional
-    public void update(long id, Fabricante fabricante) {
-        Fabricante edicaoFabricante = fabricanteRepository.findById(id);
-
-        edicaoFabricante.setNome(fabricante.getNome());
+    public FabricanteResponseDTO update(long id, FabricanteDTO dto) {
+        Fabricante fabricante = fabricanteRepository.findById(id);
+        if (fabricante == null) {
+            throw new NotFoundException("Fabricante não encontrado.");
+        }
+        fabricante.atualizarFabricante(dto);
+        return FabricanteResponseDTO.valueOf(fabricante);
     }
 
     @Override
@@ -41,8 +43,12 @@ public class FabricanteServiceImpl implements FabricanteService {
     }
 
     @Override
-    public Fabricante findById(long id) {
-        return fabricanteRepository.findById(id);
+    public FabricanteResponseDTO findById(long id) {
+        Fabricante fabricante = fabricanteRepository.findById(id);
+        if (fabricante == null) {
+            throw new NotFoundException("Fabricante não encontrado.");
+        }
+        return FabricanteResponseDTO.valueOf(fabricante);
     }
 
     @Override
