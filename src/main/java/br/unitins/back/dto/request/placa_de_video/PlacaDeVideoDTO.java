@@ -2,24 +2,27 @@ package br.unitins.back.dto.request.placa_de_video;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public record PlacaDeVideoDTO(
-        @NotEmpty(message = "O nome não pode ser vazio.")
+        @NotBlank(message = "O nome não pode ser vazio.")
         String nome,
         @NotNull(message = "O preço não pode ser nulo.")
+        @Positive(message = "O preço deve ser positivo.")
         BigDecimal preco,
         String nomeImagem,
-        @NotNull(message = "A especificação técnica é obrigatória.")
-        EspecificacaoTecnicaDTO especificacaoTecnica,
         @NotNull(message = "O fabricante é obrigatório.")
-        FabricanteDTO fabricante,
+        Long idFabricante,
         @NotNull(message = "A categoria é obrigatória.")
         Integer idCategoria,
-        @NotNull(message = "O estoque é obrigatório.")
-        @Min(value = 0, message = "O estoque não pode ser negativo.")
-        Integer estoque) {
+        @PositiveOrZero(message = "O estoque não pode ser negativo.")
+        Integer estoque,
+        @NotNull(message = "A especificação técnica é obrigatória.")
+        @Valid
+        EspecificacaoTecnicaDTO especificacaoTecnica) {
 
 }

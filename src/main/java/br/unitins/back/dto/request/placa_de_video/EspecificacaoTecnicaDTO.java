@@ -1,19 +1,15 @@
 package br.unitins.back.dto.request.placa_de_video;
 
-import br.unitins.back.model.placa_de_video.EspecificacaoTecnica;
+import jakarta.validation.constraints.NotBlank;
 
 public record EspecificacaoTecnicaDTO(
+        @NotBlank(message = "A memória não pode ser vazia.")
         String memoria,
+        @NotBlank(message = "O clock não pode ser vazio.")
         String clock,
+        @NotBlank(message = "O barramento não pode ser vazio.")
         String barramento,
+        @NotBlank(message = "O consumo de energia não pode ser vazio.")
         String consumoEnergia) {
 
-    public static EspecificacaoTecnicaDTO valueOf(EspecificacaoTecnica especificacao) {
-        return new EspecificacaoTecnicaDTO(
-                especificacao.getMemoria(),
-                especificacao.getClock(),
-                especificacao.getBarramento(),
-                especificacao.getConsumoEnergia()
-        );
-    }
 }

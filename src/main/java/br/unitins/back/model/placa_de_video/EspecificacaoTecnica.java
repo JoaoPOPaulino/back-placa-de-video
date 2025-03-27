@@ -1,14 +1,20 @@
 package br.unitins.back.model.placa_de_video;
 
+import br.unitins.back.dto.request.placa_de_video.EspecificacaoTecnicaDTO;
 import br.unitins.back.model.DefaultEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class EspecificacaoTecnica extends DefaultEntity {
 
+    @Column(nullable = false, length = 50)
     private String memoria;
+    @Column(nullable = false, length = 50)
     private String clock;
+    @Column(nullable = false, length = 50)
     private String barramento;
+    @Column(nullable = false, length = 50)
     private String consumoEnergia;
 
     public String getMemoria() {
@@ -41,6 +47,24 @@ public class EspecificacaoTecnica extends DefaultEntity {
 
     public void setConsumoEnergia(String consumoEnergia) {
         this.consumoEnergia = consumoEnergia;
+    }
+
+    public void atualizarEspecificacao(EspecificacaoTecnicaDTO dto) {
+        this.memoria = dto.memoria();
+        this.clock = dto.clock();
+        this.barramento = dto.barramento();
+        this.consumoEnergia = dto.consumoEnergia();
+    }
+
+    public EspecificacaoTecnica(EspecificacaoTecnicaDTO dto) {
+        this.memoria = dto.memoria();
+        this.clock = dto.clock();
+        this.barramento = dto.barramento();
+        this.consumoEnergia = dto.consumoEnergia();
+    }
+
+    public EspecificacaoTecnica() {
+
     }
 
 }

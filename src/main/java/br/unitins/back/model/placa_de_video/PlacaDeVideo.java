@@ -3,31 +3,58 @@ package br.unitins.back.model.placa_de_video;
 import java.math.BigDecimal;
 
 import br.unitins.back.model.DefaultEntity;
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class PlacaDeVideo extends DefaultEntity {
 
+    @NotBlank(message = "O nome não pode ser vazio.")
+    @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
+    @Column(nullable = false, length = 100)
     private String nome;
+
+    @NotNull(message = "O preço não pode ser nulo.")
+    @Positive(message = "O preço deve ser positivo.")
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
+
+    @Column(name = "nome_imagem", length = 200)
     private String nomeImagem;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull(message = "A especificação técnica é obrigatória.")
+    @ManyToOne
+    @JoinColumn(name = "id_especificacao_tecnica", nullable = false)
     private EspecificacaoTecnica especificacaoTecnica;
 
+    @NotNull(message = "O fabricante é obrigatório.")
     @ManyToOne
+    @JoinColumn(name = "id_fabricante", nullable = false)
     private Fabricante fabricante;
 
+    @NotNull(message = "A categoria é obrigatória.")
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
     private Categoria categoria;
 
-    private Integer estoque;
+    @PositiveOrZero(message = "O estoque não pode ser negativo.")
+    @Column(nullable = false)
+    private Integer estoque = 0;
 
+    // Construtores
+    public PlacaDeVideo() {
+    }
+
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -42,6 +69,14 @@ public class PlacaDeVideo extends DefaultEntity {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     public EspecificacaoTecnica getEspecificacaoTecnica() {
@@ -68,14 +103,6 @@ public class PlacaDeVideo extends DefaultEntity {
         this.categoria = categoria;
     }
 
-    public String getNomeImagem() {
-        return nomeImagem;
-    }
-
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
-    }
-
     public Integer getEstoque() {
         return estoque;
     }
@@ -84,4 +111,21 @@ public class PlacaDeVideo extends DefaultEntity {
         this.estoque = estoque;
     }
 
+    // Métodos de negócio
+    public void adicionarEstoque(Integer quantidade) {
+        if (quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade não pode ser negativa");
+        }
+        this.estoque += quantidade;
+    }
+
+    public void removerEstoque(Integer quantidade) {
+        if (quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade não pode ser negativa");
+        }
+        if (this.estoque < quantidade) {
+            throw new IllegalStateException("Estoque insuficiente");
+        }
+        this.estoque -= quantidade;
+    }
 }

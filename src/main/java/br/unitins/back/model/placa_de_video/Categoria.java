@@ -20,4 +20,16 @@ public enum Categoria {
     public String getLabel() {
         return label;
     }
+
+    public static Categoria valueOf(Integer id) throws IllegalArgumentException {
+        if ((id == null)) {
+            return null;
+        }
+        for (Categoria categoria : Categoria.values()) {
+            if (categoria.getId().equals(id)) {
+                return categoria;
+            }
+        }
+        throw new IllegalArgumentException("Id inválido: " + id);
+    }
 }
