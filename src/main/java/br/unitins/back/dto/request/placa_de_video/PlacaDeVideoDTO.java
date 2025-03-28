@@ -2,7 +2,6 @@ package br.unitins.back.dto.request.placa_de_video;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -22,7 +21,6 @@ public record PlacaDeVideoDTO(
         @PositiveOrZero(message = "O estoque não pode ser negativo.")
         Integer estoque,
         @NotNull(message = "A especificação técnica é obrigatória.")
-        @Valid
-        EspecificacaoTecnicaDTO especificacaoTecnica) {
+        Long idEspecificacaoTecnica) {
 
 }

@@ -1,16 +1,20 @@
 package br.unitins.back.service.placa_de_video;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.unitins.back.dto.request.placa_de_video.PlacaDeVideoDTO;
 import br.unitins.back.dto.response.PlacaDeVideoResponseDTO;
-import br.unitins.back.model.placa_de_video.*;
-import br.unitins.back.repository.*;
+import br.unitins.back.model.placa_de_video.Categoria;
+import br.unitins.back.model.placa_de_video.EspecificacaoTecnica;
+import br.unitins.back.model.placa_de_video.PlacaDeVideo;
+import br.unitins.back.repository.EspecificacaoTecnicaRepository;
+import br.unitins.back.repository.FabricanteRepository;
+import br.unitins.back.repository.PlacaDeVideoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
@@ -20,6 +24,9 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
 
     @Inject
     FabricanteRepository fabricanteRepository;
+
+    @Inject
+    EspecificacaoTecnicaRepository especificacaoRepository;
 
     @Override
     @Transactional
@@ -35,6 +42,7 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
     public PlacaDeVideoResponseDTO update(Long id, PlacaDeVideoDTO dto) {
         PlacaDeVideo placa = repository.findById(id);
         if (placa == null) {
+            System.out.println("ID recebido para atualização: " + id);
             throw new NotFoundException("Placa de vídeo não encontrada");
         }
         mapDtoToEntity(dto, placa);
@@ -48,7 +56,12 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
         placa.setFabricante(fabricanteRepository.findById(dto.idFabricante()));
         placa.setCategoria(Categoria.valueOf(dto.idCategoria()));
         placa.setEstoque(dto.estoque());
-        placa.setEspecificacaoTecnica(new EspecificacaoTecnica(dto.especificacaoTecnica()));
+
+        EspecificacaoTecnica especificacao = especificacaoRepository.findById(dto.idEspecificacaoTecnica());
+        if (especificacao == null) {
+            throw new NotFoundException("Especificação técnica não encontrada");
+        }
+        placa.setEspecificacaoTecnica(especificacao);
     }
 
     @Override
