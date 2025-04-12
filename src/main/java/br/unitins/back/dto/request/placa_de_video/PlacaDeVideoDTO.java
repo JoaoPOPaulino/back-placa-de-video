@@ -13,7 +13,6 @@ public record PlacaDeVideoDTO(
         @NotNull(message = "O preço não pode ser nulo.")
         @Positive(message = "O preço deve ser positivo.")
         BigDecimal preco,
-        String nomeImagem,
         @NotNull(message = "O fabricante é obrigatório.")
         Long idFabricante,
         @NotNull(message = "A categoria é obrigatória.")

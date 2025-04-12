@@ -25,4 +25,6 @@ public interface PlacaDeVideoService {
     long count();
 
     long countByNome(String nome);
+
+    PlacaDeVideoResponseDTO updateNomeImagem(Long id, String nomeImagem);
 }

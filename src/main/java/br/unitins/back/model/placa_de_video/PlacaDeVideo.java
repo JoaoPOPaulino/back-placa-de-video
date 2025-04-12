@@ -28,7 +28,6 @@ public class PlacaDeVideo extends DefaultEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
-    @Column(name = "nome_imagem", length = 200)
     private String nomeImagem;
 
     @NotNull(message = "A especificação técnica é obrigatória.")

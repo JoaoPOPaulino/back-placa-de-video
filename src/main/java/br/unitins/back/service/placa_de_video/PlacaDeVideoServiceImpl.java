@@ -52,7 +52,6 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
     private void mapDtoToEntity(PlacaDeVideoDTO dto, PlacaDeVideo placa) {
         placa.setNome(dto.nome());
         placa.setPreco(dto.preco());
-        placa.setNomeImagem(dto.nomeImagem());
         placa.setFabricante(fabricanteRepository.findById(dto.idFabricante()));
         placa.setCategoria(Categoria.valueOf(dto.idCategoria()));
         placa.setEstoque(dto.estoque());
@@ -113,5 +112,13 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
         return placas.stream()
                 .map(PlacaDeVideoResponseDTO::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public PlacaDeVideoResponseDTO updateNomeImagem(Long id, String nomeImagem) {
+        PlacaDeVideo placaDeVideo = repository.findById(id);
+        placaDeVideo.setNomeImagem(nomeImagem);
+        return PlacaDeVideoResponseDTO.valueOf(placaDeVideo);
     }
 }
