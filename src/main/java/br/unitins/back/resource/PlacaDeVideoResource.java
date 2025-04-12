@@ -58,7 +58,7 @@ public class PlacaDeVideoResource {
     @GET
     public List<PlacaDeVideoResponseDTO> findAll(
             @QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("pageSize") @DefaultValue("20") int pageSize
+            @QueryParam("pageSize") @DefaultValue("8") int pageSize
     ) {
         return service.findAll(page, pageSize);
     }
@@ -68,7 +68,7 @@ public class PlacaDeVideoResource {
     public List<PlacaDeVideoResponseDTO> findByNome(
             @QueryParam("nome") String nome,
             @QueryParam("page") @DefaultValue("0") int page,
-            @QueryParam("pageSize") @DefaultValue("20") int pageSize
+            @QueryParam("pageSize") @DefaultValue("8") int pageSize
     ) {
         return service.findByNome(nome, page, pageSize);
     }

@@ -81,7 +81,7 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
 
     @Override
     public List<PlacaDeVideoResponseDTO> findAll(int page, int pageSize) {
-        return repository.findAll()
+        return repository.findAllOrdered()
                 .page(page, pageSize)
                 .list()
                 .stream()
