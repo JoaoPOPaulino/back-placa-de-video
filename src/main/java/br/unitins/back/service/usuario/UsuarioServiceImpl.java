@@ -5,8 +5,13 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
+import br.unitins.back.dto.request.usuario.EnderecoDTO;
+import br.unitins.back.dto.request.usuario.TelefoneDTO;
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
+import br.unitins.back.model.usuario.Endereco;
+import br.unitins.back.model.usuario.Perfil;
+import br.unitins.back.model.usuario.Telefone;
 import br.unitins.back.model.usuario.Usuario;
 import br.unitins.back.repository.UsuarioRepository;
 import br.unitins.back.resource.UsuarioResource;
@@ -32,36 +37,51 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO insert(@Valid UsuarioDTO dto) {
-        if (repository.findByLogin(dto.login()) != null) {
-            LOGGER.error("Tentativa de criar usuário com login existente: " + dto.login());
-            throw new ValidationException("login", "Login já existe.");
+        if (repository.existsByLogin((dto.login()))) {
+            throw new IllegalArgumentException("Login já está em uso");
         }
-        Usuario novoUsuario = new Usuario(dto, hashService);
-        repository.persist(novoUsuario);
-        return UsuarioResponseDTO.valueOf(novoUsuario);
+        Usuario usuario = new Usuario();
+        mapDtoToEntity(dto, usuario);
+        repository.persist(usuario);
+        return UsuarioResponseDTO.valueOf(usuario);
     }
 
     @Override
     @Transactional
     public UsuarioResponseDTO update(@Valid UsuarioDTO dto, Long id) {
-        LOGGER.info("Iniciando atualização do usuário com ID: " + id);
         Usuario usuario = repository.findById(id);
         if (usuario == null) {
-            LOGGER.error("Usuário não encontrado para o ID: " + id);
             throw new NotFoundException("Usuário não encontrado");
         }
-        Usuario usuarioExiste = repository.findByLogin(dto.login());
-        if (usuarioExiste != null && !usuarioExiste.getId().equals(id)) {
-            throw new ValidationException("login", "Login já existe.");
-        }
-        LOGGER.info("Usuário encontrado, atualizando...");
-        usuario.atualizarComDTO(dto, hashService);
-        repository.persist(usuario);
-        LOGGER.info("Usuario atualizado com sucesso.");
+        mapDtoToEntity(dto, usuario);
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
+    private void mapDtoToEntity(UsuarioDTO dto, Usuario usuario) {
+        usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setLogin(dto.login());
+        usuario.setSenha(hashService.getHashSenha(dto.senha()));
+        usuario.setPerfil(Perfil.valueOf(dto.idPerfil()));
+
+        usuario.setTelefones(new ArrayList<>());
+        usuario.setEnderecos(new ArrayList<>());
+        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+            for (TelefoneDTO telDto : dto.telefones()) {
+                Telefone telefone = new Telefone(telDto);
+                usuario.getTelefones().add(telefone);
+            }
+            if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+                for (EnderecoDTO endDto : dto.enderecos()) {
+                    Endereco endereco = new Endereco(endDto);
+                    usuario.getEnderecos().add(endereco);
+                }
+            }
+        }
+    }
+
     @Override
+    @Transactional
     public void delete(Long id) {
         if (!repository.deleteById(id)) {
             throw new NotFoundException("Usuário não encontrado.");
@@ -88,22 +108,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioResponseDTO> findByAll() {
-        List<Usuario> usuarios = repository.listAll();
-        List<UsuarioResponseDTO> dtos = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
-            dtos.add(UsuarioResponseDTO.valueOf(usuario));
-        }
-        return dtos;
+    public List<UsuarioResponseDTO> findAll() {
+        return repository.listAll().stream()
+                .map(UsuarioResponseDTO::valueOf).toList();
     }
 
     @Override
     public UsuarioResponseDTO findByLoginAndSenha(String login, String senha) {
-        Usuario usuario = repository.findByLoginAndSenha(login, senha);
+        String hashSenha = hashService.getHashSenha(senha);
+        Usuario usuario = repository.findByLoginAndSenha(login, hashSenha);
         if (usuario == null) {
-            throw new ValidationException("login", "Login ou senha inválido");
+            throw new NotFoundException("Login ou senha inválidos");
         }
-
         return UsuarioResponseDTO.valueOf(usuario);
     }
 

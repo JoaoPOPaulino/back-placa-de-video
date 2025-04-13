@@ -26,7 +26,7 @@ public class PlacaDeVideoRepository implements PanacheRepository<PlacaDeVideo> {
     }
 
     public List<PlacaDeVideo> findByCategoria(Categoria categoria) {
-        return find("Categoria", categoria).list();
+        return find("categoria", categoria).list();
     }
 
     public PanacheQuery<PlacaDeVideo> findAllOrdered() {

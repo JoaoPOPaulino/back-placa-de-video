@@ -3,13 +3,15 @@ package br.unitins.back.resource;
 import org.jboss.logging.Logger;
 
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
+import br.unitins.back.dto.response.UsuarioResponseDTO;
 import br.unitins.back.service.usuario.UsuarioService;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -30,7 +32,6 @@ public class UsuarioResource {
     UsuarioService service;
 
     @POST
-    @RolesAllowed({"User", "Admin"})
     public Response insert(UsuarioDTO dto) {
         LOGGER.info("Iniciando inserção de novo usuário");
         Response response = Response.status(Status.CREATED).entity(service.insert(dto)).build();
@@ -41,8 +42,7 @@ public class UsuarioResource {
     @PUT
     @Transactional
     @Path("/{id}")
-    @RolesAllowed({"User", "Admin"})
-    public Response update(UsuarioDTO dto, @PathParam("id") Long id) {
+    public Response update(@Valid UsuarioDTO dto, @PathParam("id") Long id) {
         LOGGER.info("Iniciando atualização do usuário com ID: " + id);
         service.update(dto, id);
         LOGGER.info("Usuário com ID: " + id + " atualizado com sucesso");
@@ -52,7 +52,6 @@ public class UsuarioResource {
     @DELETE
     @Transactional
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id) {
         LOGGER.info("Iniciando remoção do usuário com ID: " + id);
         service.delete(id);
@@ -61,17 +60,15 @@ public class UsuarioResource {
     }
 
     @GET
-    @RolesAllowed({"Admin"})
     public Response findAll() {
         LOGGER.info("Buscando todos os usuários");
-        Response response = Response.ok(service.findByAll()).build();
+        Response response = Response.ok(service.findAll()).build();
         LOGGER.info("Usuários recuperados com sucesso");
         return response;
     }
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
     public Response findById(@PathParam("id") Long id) {
         LOGGER.info("Buscando usuário com ID: " + id);
         Response response = Response.ok(service.findById(id)).build();
@@ -81,11 +78,21 @@ public class UsuarioResource {
 
     @GET
     @Path("/search/nome/{nome}")
-    @RolesAllowed({"Admin"})
     public Response findByNome(@PathParam("nome") String nome) {
         LOGGER.info("Buscando usuário pelo nome: " + nome);
         Response response = Response.ok(service.findByNome(nome)).build();
         LOGGER.info("Usuários com nome: " + nome + " recuperados com sucesso");
         return response;
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(@Valid UsuarioDTO dto) {
+        try {
+            UsuarioResponseDTO usuario = service.findByLoginAndSenha(dto.login(), dto.senha());
+            return Response.ok(usuario).build();
+        } catch (NotFoundException e) {
+            return Response.status(Status.UNAUTHORIZED).build();
+        }
     }
 }

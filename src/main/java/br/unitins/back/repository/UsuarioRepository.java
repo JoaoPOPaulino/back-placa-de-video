@@ -15,12 +15,15 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
     }
 
     public Usuario findByLogin(String login) {
-        try {
-            return find("login = ?1 ", login).singleResult();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return find("login", login).firstResult();
+    }
+
+    public boolean existsByLogin(String login) {
+        return count("login = ?1", login) > 0;
+    }
+
+    public boolean existsByEmail(String email) {
+        return count("email = ?1", email) > 0;
     }
 
     public Usuario findByLoginAndSenha(String login, String senha) {

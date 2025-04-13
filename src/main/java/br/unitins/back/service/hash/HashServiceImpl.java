@@ -3,6 +3,7 @@ package br.unitins.back.service.hash;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
+import java.util.Scanner;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -36,10 +37,19 @@ public class HashServiceImpl implements HashService {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         HashService service = new HashServiceImpl();
         System.out.println(service.getHashSenha("123"));
-        System.out.println(service.getHashSenha("123"));
-        System.out.println(service.getHashSenha("Leandra"));
-        System.out.println(service.getHashSenha("leandra"));
+        System.out.println(service.getHashSenha("111"));
+        System.out.println(service.getHashSenha("222"));
+        System.out.println(service.getHashSenha("333"));
+        System.out.println(service.getHashSenha("444"));
+        System.out.println(service.getHashSenha("555"));
+        System.out.println(service.getHashSenha("666"));
+        System.out.println();
+        System.out.println("Insira a senha: ");
+        String senha = scanner.nextLine();
+        System.out.println(service.getHashSenha(senha));
     }
 }

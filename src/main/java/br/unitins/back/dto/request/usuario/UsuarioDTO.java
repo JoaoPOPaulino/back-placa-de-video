@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UsuarioDTO(
@@ -14,14 +14,14 @@ public record UsuarioDTO(
         @Email(message = "E-mail inválido.")
         String email,
         @NotBlank(message = "O login não pode ser vazio.")
+        @Size(min = 3, message = "O login deve ter pelo menos 3 caracteres")
         String login,
         @NotBlank(message = "A senha não pode ser vazia.")
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres.")
         String senha,
+        @NotNull(message = "O perfil não pode ser nulo.")
         Integer idPerfil,
-        @NotEmpty(message = "O usuário deve ter pelo menos um telefone.")
         List<TelefoneDTO> telefones,
-        @NotEmpty(message = "O usuário deve ter pelo menos um endereço.")
         List<EnderecoDTO> enderecos) {
 
 }
