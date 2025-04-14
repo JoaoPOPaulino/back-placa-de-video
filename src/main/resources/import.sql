@@ -46,13 +46,13 @@ INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VA
 
 
 -- Placas de Vídeo
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 3060', 2499.99, 1, 1, 'INTERMEDIARIA', 15);
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RX 6700 XT', 2899.90, 2, 2, 'INTERMEDIARIA', 8);
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 3060', 2499.99, 1, 1, 'INTERMEDIARIA', 15, 'rtx3060.jpg');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 6700 XT', 2899.90, 2, 2, 'INTERMEDIARIA', 8, 'rx6700xt.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 4090', 14999.90, 3, 1, 'ALTO_DESEMPENHO', 3);
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('Arc A770', 2199.00, 4, 3, 'ENTRADA', 12);
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A770', 2199.00, 4, 3, 'ENTRADA', 12, 'arcA770.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 4070 Ti', 5999.99, 5, 1, 'ALTO_DESEMPENHO', 5);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RX 7900 XTX', 7999.90, 6, 2, 'ALTO_DESEMPENHO', 4);
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('GTX 1660 Super', 1299.90, 7, 1, 'ENTRADA', 10);
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('GTX 1660 Super', 1299.90, 7, 1, 'ENTRADA', 10, 'gtx1660Super.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('GT 1030', 499.90, 8, 1, 'ENTRADA', 25);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RX 550', 599.90, 9, 2, 'ENTRADA', 20);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 3080 Ti', 8999.99, 10, 1, 'ALTO_DESEMPENHO', 6);
@@ -60,7 +60,7 @@ INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, 
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('GT 710', 399.90, 12, 1, 'ENTRADA', 30);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('GTX 1070', 1099.90, 13, 4, 'INTERMEDIARIA', 7);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RX 580', 999.90, 14, 2, 'INTERMEDIARIA', 9);
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 3080', 7299.90, 15, 1, 'ALTO_DESEMPENHO', 4);
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque,nomeImagem) VALUES ('RTX 3080', 7299.90, 15, 1, 'ALTO_DESEMPENHO', 4, 'rtx3080.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RTX 5000 ADA', 18999.90, 16, 1, 'ALTO_DESEMPENHO', 2);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('RX 7600', 2299.90, 17, 2, 'INTERMEDIARIA', 10);
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15);
