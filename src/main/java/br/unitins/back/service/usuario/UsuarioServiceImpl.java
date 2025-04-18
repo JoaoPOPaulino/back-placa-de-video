@@ -131,4 +131,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return UsuarioResponseDTO.valueOf(usuario);
     }
+
+    @Override
+    public long count() {
+        return repository.count();
+    }
+
+    private String gerarSenhaTemporaria() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            int index = (int)(caracteres.length() * Math.random());
+            sb.append(caracteres.charAt(index));
+        }
+        return sb.toString();
+    }
 }

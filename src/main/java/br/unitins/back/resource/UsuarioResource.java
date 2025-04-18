@@ -95,4 +95,13 @@ public class UsuarioResource {
             return Response.status(Status.UNAUTHORIZED).build();
         }
     }
+
+    @GET
+    @Path("/count")
+    public long count() {
+        return service.count();
+    }
+    
+    
+
 }
