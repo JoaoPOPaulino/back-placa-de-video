@@ -14,12 +14,11 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends DefaultEntity {
 
-    private String nome;
+    private String nome;    
     private String email;
     private String login;
     private String senha;
@@ -27,14 +26,12 @@ public class Usuario extends DefaultEntity {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
-    @NotEmpty
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_telefone",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_telefone"))
     private List<Telefone> telefones;
 
-    @NotEmpty
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_endereco",
             joinColumns = @JoinColumn(name = "id_usuario"),
