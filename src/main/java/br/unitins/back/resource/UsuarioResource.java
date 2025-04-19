@@ -102,6 +102,16 @@ public class UsuarioResource {
         return service.count();
     }
     
-    
+    @GET
+@Path("/exists")
+public Response existsByLogin(@PathParam("login") String login) {
+    try {
+        boolean exists = service.existsByLogin(login);
+        return Response.ok(exists).build();
+    } catch (Exception e) {
+        LOGGER.error("Erro ao verificar login", e);
+        return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+    }
+}
 
 }

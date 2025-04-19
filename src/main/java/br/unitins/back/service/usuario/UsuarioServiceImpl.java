@@ -146,4 +146,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean existsByLogin(String login) {
+    return repository.existsByLogin(login);
+}
 }

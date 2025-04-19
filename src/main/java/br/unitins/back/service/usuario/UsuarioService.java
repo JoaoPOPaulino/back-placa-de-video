@@ -25,4 +25,6 @@ public interface UsuarioService {
     UsuarioResponseDTO findByLogin(String login);
 
     long count();
+
+    boolean existsByLogin(String login);
 }
