@@ -151,4 +151,50 @@ public class UsuarioServiceImpl implements UsuarioService {
     public boolean existsByLogin(String login) {
     return repository.existsByLogin(login);
 }
+
+@Override
+public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String senha) {
+    String hashSenha = hashService.getHashSenha(senha);
+
+    Usuario usuario = repository.findByLoginAndSenha(loginOuEmail, hashSenha);
+
+    if (usuario == null) {
+        usuario = repository.findByEmailAndSenha(loginOuEmail, hashSenha);
+    }
+
+    if (usuario == null) {
+        throw new NotFoundException("Login ou senha inválidos");
+    }
+
+    return UsuarioResponseDTO.valueOf(usuario);
+}
+
+    @Override
+    public UsuarioResponseDTO findByEmailAndSenha(String email, String senha) {
+        String hashSenha = hashService.getHashSenha(senha);
+        Usuario usuario = repository.findByEmailAndSenha(email, hashSenha);
+        if (usuario == null) {
+            throw new NotFoundException("Email ou senha inválidos");
+        }
+        return UsuarioResponseDTO.valueOf(usuario);
+    }   
+
+    @Override
+@Transactional
+public void recuperarSenha(String loginOuEmail) {
+    Usuario usuario = repository.findByLoginOrEmail(loginOuEmail);
+
+    if (usuario == null) {
+        throw new NotFoundException("Usuário não encontrado");
+    }
+
+    String novaSenha = gerarSenhaTemporaria();
+    usuario.setSenha(hashService.getHashSenha(novaSenha));
+    
+    // Aqui você deveria enviar a senha para o email.
+    System.out.println("Senha temporária para " + usuario.getEmail() + ": " + novaSenha);
+
+    // Em produção: aqui seria o envio real via serviço de email
+}
+
 }

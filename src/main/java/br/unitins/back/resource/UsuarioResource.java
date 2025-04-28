@@ -88,13 +88,13 @@ public class UsuarioResource {
     @POST
     @Path("/login")
     public Response login(@Valid UsuarioDTO dto) {
-        try {
-            UsuarioResponseDTO usuario = service.findByLoginAndSenha(dto.login(), dto.senha());
-            return Response.ok(usuario).build();
-        } catch (NotFoundException e) {
-            return Response.status(Status.UNAUTHORIZED).build();
-        }
+    try {
+        UsuarioResponseDTO usuario = service.findByLoginOrEmailAndSenha(dto.login(), dto.senha());
+        return Response.ok(usuario).build();
+    } catch (NotFoundException e) {
+        return Response.status(Status.UNAUTHORIZED).build();
     }
+}
 
     @GET
     @Path("/count")
@@ -103,14 +103,25 @@ public class UsuarioResource {
     }
     
     @GET
-@Path("/exists")
-public Response existsByLogin(@PathParam("login") String login) {
+    @Path("/exists")
+    public Response existsByLogin(@PathParam("login") String login) {
+        try {
+            boolean exists = service.existsByLogin(login);
+            return Response.ok(exists).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao verificar login", e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @POST
+    @Path("/recuperar-senha")
+    public Response recuperarSenha(@QueryParam("loginOuEmail") String loginOuEmail) {
     try {
-        boolean exists = service.existsByLogin(login);
-        return Response.ok(exists).build();
-    } catch (Exception e) {
-        LOGGER.error("Erro ao verificar login", e);
-        return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        service.recuperarSenha(loginOuEmail);
+        return Response.ok("Nova senha enviada para seu email.").build();
+    } catch (NotFoundException e) {
+        return Response.status(Status.NOT_FOUND).entity("Usuário não encontrado").build();
     }
 }
 

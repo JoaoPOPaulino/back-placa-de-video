@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
+import br.unitins.back.model.usuario.Usuario;
 import jakarta.validation.Valid;
 
 public interface UsuarioService {
@@ -22,9 +23,16 @@ public interface UsuarioService {
 
     UsuarioResponseDTO findByLoginAndSenha(String login, String senha);
 
+    UsuarioResponseDTO findByEmailAndSenha(String email, String senha);
+
     UsuarioResponseDTO findByLogin(String login);
+
+    UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String senha);
 
     long count();
 
     boolean existsByLogin(String login);
+
+    void recuperarSenha(String loginOuEmail);
+
 }
