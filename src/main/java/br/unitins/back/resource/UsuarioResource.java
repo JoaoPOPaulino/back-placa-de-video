@@ -103,7 +103,7 @@ public class UsuarioResource {
     }
     
     @GET
-    @Path("/exists")
+    @Path("/exists/{login}")
     public Response existsByLogin(@PathParam("login") String login) {
         try {
             boolean exists = service.existsByLogin(login);
@@ -114,15 +114,5 @@ public class UsuarioResource {
         }
     }
 
-    @POST
-    @Path("/recuperar-senha")
-    public Response recuperarSenha(@QueryParam("loginOuEmail") String loginOuEmail) {
-    try {
-        service.recuperarSenha(loginOuEmail);
-        return Response.ok("Nova senha enviada para seu email.").build();
-    } catch (NotFoundException e) {
-        return Response.status(Status.NOT_FOUND).entity("Usuário não encontrado").build();
-    }
 }
 
-}

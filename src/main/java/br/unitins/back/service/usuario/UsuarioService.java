@@ -33,6 +33,6 @@ public interface UsuarioService {
 
     boolean existsByLogin(String login);
 
-    void recuperarSenha(String loginOuEmail);
+    void requestPasswordReset(String loginOrEmail);
 
 }

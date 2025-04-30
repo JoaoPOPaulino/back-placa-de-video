@@ -15,6 +15,7 @@ import br.unitins.back.model.usuario.Telefone;
 import br.unitins.back.model.usuario.Usuario;
 import br.unitins.back.repository.UsuarioRepository;
 import br.unitins.back.resource.UsuarioResource;
+import br.unitins.back.service.PasswordResetService;
 import br.unitins.back.service.hash.HashService;
 import br.unitins.back.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -31,6 +32,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Inject
     HashService hashService;
+
+    @Inject
+    PasswordResetService passwordResetService;
 
     private static final Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
 
@@ -180,21 +184,9 @@ public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String
     }   
 
     @Override
-@Transactional
-public void recuperarSenha(String loginOuEmail) {
-    Usuario usuario = repository.findByLoginOrEmail(loginOuEmail);
-
-    if (usuario == null) {
-        throw new NotFoundException("Usuário não encontrado");
+    @Transactional
+    public void requestPasswordReset(String loginOrEmail) {
+        passwordResetService.requestPasswordReset(loginOrEmail);
     }
-
-    String novaSenha = gerarSenhaTemporaria();
-    usuario.setSenha(hashService.getHashSenha(novaSenha));
-    
-    // Aqui você deveria enviar a senha para o email.
-    System.out.println("Senha temporária para " + usuario.getEmail() + ": " + novaSenha);
-
-    // Em produção: aqui seria o envio real via serviço de email
-}
 
 }
