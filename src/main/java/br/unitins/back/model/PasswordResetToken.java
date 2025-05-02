@@ -7,16 +7,20 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class PasswordResetToken extends DefaultEntity{
-    @Column(nullable = false, unique = true)
+    @NotNull
+    @Column(nullable = false, unique = true, length=100)
     private String token;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
+    @NotNull
     @Column(nullable = false)
     private LocalDateTime expiryDate;
 

@@ -1,5 +1,9 @@
 package br.unitins.back.resource;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+
 import br.unitins.back.service.PasswordResetService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -20,7 +24,11 @@ public class PasswordResetResource {
 
     @POST
     @Path("/request")
-    public Response requestPasswordReset(@QueryParam("loginOrEmail") String loginOrEmail) {
+    @Operation(summary = "Solicitar recuperação de senha", description = "Envia um e-mail com um link para redefinir a senha.")
+    @APIResponse(responseCode = "200", description = "E-mail de recuperação enviado com sucesso")
+    @APIResponse(responseCode = "404", description = "Usuário não encontrado")
+    @APIResponse(responseCode = "500", description = "Erro interno ao enviar e-mail")
+    public Response requestPasswordReset(@Parameter(description = "Login ou e-mail do usuário", required = true) @QueryParam("loginOrEmail") String loginOrEmail) {
         try {
             passwordResetService.requestPasswordReset(loginOrEmail);
             return Response.ok("E-mail de recuperação enviado com sucesso").build();
@@ -33,7 +41,10 @@ public class PasswordResetResource {
 
     @POST
     @Path("/reset")
-    public Response resetPassword(@QueryParam("token") String token, @QueryParam("newPassword") String newPassword) {
+    @Operation(summary = "Redefinir senha", description = "Redefine a senha do usuário usando o token recebido no e-mail.")
+    @APIResponse(responseCode = "200", description = "Senha redefinida com sucesso")
+    @APIResponse(responseCode = "400", description = "Token inválido ou expirado")
+    public Response resetPassword(@Parameter(description = "Token de recuperação", required = true) @QueryParam("token") String token,@Parameter(description = "Nova senha do usuário", required = true) @QueryParam("newPassword") String newPassword) {
         try {
             passwordResetService.resetPassword(token, newPassword);
             return Response.ok("Senha redefinida com sucesso").build();

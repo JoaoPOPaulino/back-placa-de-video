@@ -66,7 +66,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEmail(dto.email());
         usuario.setLogin(dto.login());
         usuario.setSenha(hashService.getHashSenha(dto.senha()));
-        usuario.setPerfil(Perfil.valueOf(dto.idPerfil()));
+        usuario.setPerfil(Perfil.valueOf(dto.perfil()));
 
         usuario.setTelefones(new ArrayList<>());
         usuario.setEnderecos(new ArrayList<>());
@@ -141,16 +141,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         return repository.count();
     }
 
-    private String gerarSenhaTemporaria() {
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 8; i++) {
-            int index = (int)(caracteres.length() * Math.random());
-            sb.append(caracteres.charAt(index));
-        }
-        return sb.toString();
-    }
-
     @Override
     public boolean existsByLogin(String login) {
     return repository.existsByLogin(login);
@@ -186,6 +176,9 @@ public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String
     @Override
     @Transactional
     public void requestPasswordReset(String loginOrEmail) {
+        if(loginOrEmail == null || loginOrEmail.isBlank()) {
+            throw new IllegalArgumentException("Login ou e-mail não pode ser vazio");
+        }
         passwordResetService.requestPasswordReset(loginOrEmail);
     }
 

@@ -14,15 +14,28 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Usuario extends DefaultEntity {
 
-    private String nome;    
+    @NotBlank
+    private String nome;  
+    
+    
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
     private String login;
+
+    @NotBlank
     private String senha;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
@@ -47,18 +60,16 @@ public class Usuario extends DefaultEntity {
         this.email = dto.email();
         this.login = dto.login();
         this.senha = hashService.getHashSenha(dto.senha());
-        this.perfil = Perfil.valueOf(dto.idPerfil());
+        this.perfil = Perfil.valueOf(dto.perfil());
 
-        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
-            this.telefones = dto.telefones().stream()
-                    .map(Telefone::new)
-                    .collect(Collectors.toList());
+        if (dto.telefones() != null) {
+            this.telefones.clear();
+            this.telefones.addAll(dto.telefones().stream().map(Telefone::new).collect(Collectors.toList()));
         }
 
         if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-            this.enderecos = dto.enderecos().stream()
-                    .map(Endereco::new)
-                    .collect(Collectors.toList());
+            this.enderecos.clear();
+            this.enderecos.addAll(dto.enderecos().stream().map(Endereco::new).collect(Collectors.toList()));
         }
     }
 
@@ -70,7 +81,7 @@ public class Usuario extends DefaultEntity {
         if (dto.senha() != null && !dto.senha().isEmpty()) {
             this.senha = hashService.getHashSenha(dto.senha());
         }
-        this.perfil = Perfil.valueOf(dto.idPerfil());
+        this.perfil = Perfil.valueOf(dto.perfil());
 
         if (dto.telefones() != null && !dto.telefones().isEmpty()) {
             this.telefones = dto.telefones().stream()
