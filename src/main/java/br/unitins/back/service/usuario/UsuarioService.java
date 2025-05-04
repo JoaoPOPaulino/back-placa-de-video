@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
-import br.unitins.back.model.usuario.Usuario;
 import jakarta.validation.Valid;
 
 public interface UsuarioService {
@@ -34,5 +33,7 @@ public interface UsuarioService {
     boolean existsByLogin(String login);
 
     void requestPasswordReset(String loginOrEmail);
+
+    UsuarioResponseDTO updateNomeImagem(Long id, String nomeImagem);
 
 }

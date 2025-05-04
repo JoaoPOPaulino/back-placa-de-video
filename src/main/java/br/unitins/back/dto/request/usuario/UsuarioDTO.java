@@ -21,6 +21,7 @@ public record UsuarioDTO(
         @NotBlank(message = "O perfil não pode ser vazio.")
         String perfil,
         List<TelefoneDTO> telefones,
-        List<EnderecoDTO> enderecos) {
+        List<EnderecoDTO> enderecos,
+        String nomeImagem) {
 
 }

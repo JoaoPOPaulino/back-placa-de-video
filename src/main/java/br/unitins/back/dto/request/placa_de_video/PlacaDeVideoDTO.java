@@ -20,6 +20,7 @@ public record PlacaDeVideoDTO(
         @PositiveOrZero(message = "O estoque não pode ser negativo.")
         Integer estoque,
         @NotNull(message = "A especificação técnica é obrigatória.")
-        Long idEspecificacaoTecnica) {
+        Long idEspecificacaoTecnica,
+        String nomeImagem) {
 
 }

@@ -22,9 +22,8 @@ import jakarta.validation.constraints.NotNull;
 public class Usuario extends DefaultEntity {
 
     @NotBlank
-    private String nome;  
-    
-    
+    private String nome;
+
     @NotBlank
     @Email
     private String email;
@@ -50,6 +49,8 @@ public class Usuario extends DefaultEntity {
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_endereco"))
     private List<Endereco> enderecos;
+
+    private String nomeImagem;
 
     public Usuario() {
 
@@ -155,5 +156,13 @@ public class Usuario extends DefaultEntity {
     @Override
     public String toString() {
         return "Usuario [nome=" + nome + ", email=" + email + ", login=" + login + ", perfil=" + perfil + "]";
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 }

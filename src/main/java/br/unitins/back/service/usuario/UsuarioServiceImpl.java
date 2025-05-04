@@ -143,25 +143,25 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean existsByLogin(String login) {
-    return repository.existsByLogin(login);
-}
-
-@Override
-public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String senha) {
-    String hashSenha = hashService.getHashSenha(senha);
-
-    Usuario usuario = repository.findByLoginAndSenha(loginOuEmail, hashSenha);
-
-    if (usuario == null) {
-        usuario = repository.findByEmailAndSenha(loginOuEmail, hashSenha);
+        return repository.existsByLogin(login);
     }
 
-    if (usuario == null) {
-        throw new NotFoundException("Login ou senha inválidos");
-    }
+    @Override
+    public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String senha) {
+        String hashSenha = hashService.getHashSenha(senha);
 
-    return UsuarioResponseDTO.valueOf(usuario);
-}
+        Usuario usuario = repository.findByLoginAndSenha(loginOuEmail, hashSenha);
+
+        if (usuario == null) {
+            usuario = repository.findByEmailAndSenha(loginOuEmail, hashSenha);
+        }
+
+        if (usuario == null) {
+            throw new NotFoundException("Login ou senha inválidos");
+        }
+
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
 
     @Override
     public UsuarioResponseDTO findByEmailAndSenha(String email, String senha) {
@@ -171,15 +171,23 @@ public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String
             throw new NotFoundException("Email ou senha inválidos");
         }
         return UsuarioResponseDTO.valueOf(usuario);
-    }   
+    }
 
     @Override
     @Transactional
     public void requestPasswordReset(String loginOrEmail) {
-        if(loginOrEmail == null || loginOrEmail.isBlank()) {
+        if (loginOrEmail == null || loginOrEmail.isBlank()) {
             throw new IllegalArgumentException("Login ou e-mail não pode ser vazio");
         }
         passwordResetService.requestPasswordReset(loginOrEmail);
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO updateNomeImagem(Long id, String nomeImagem) {
+        Usuario usuario = repository.findById(id);
+        usuario.setNomeImagem(nomeImagem);
+        return UsuarioResponseDTO.valueOf(usuario);
     }
 
 }
