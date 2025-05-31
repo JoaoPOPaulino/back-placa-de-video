@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -94,17 +93,6 @@ public class UsuarioResource {
         Response response = Response.ok(service.findByNome(nome)).build();
         LOGGER.info("Usuários com nome: " + nome + " recuperados com sucesso");
         return response;
-    }
-
-    @POST
-    @Path("/login")
-    public Response login(@Valid UsuarioDTO dto) {
-        try {
-            UsuarioResponseDTO usuario = service.findByLoginOrEmailAndSenha(dto.login(), dto.senha());
-            return Response.ok(usuario).build();
-        } catch (NotFoundException e) {
-            return Response.status(Status.UNAUTHORIZED).build();
-        }
     }
 
     @GET

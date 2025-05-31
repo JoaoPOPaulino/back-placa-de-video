@@ -13,7 +13,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class HashServiceImpl implements HashService {
 
-    private String salt = "#blahxyz22";
+    private String salt = "#blahxyz17";
 
     private Integer iterationCount = 405;
 
@@ -47,6 +47,7 @@ public class HashServiceImpl implements HashService {
         System.out.println(service.getHashSenha("444"));
         System.out.println(service.getHashSenha("555"));
         System.out.println(service.getHashSenha("666"));
+        System.out.println(service.getHashSenha("jpuser"));
         System.out.println();
         System.out.println("Insira a senha: ");
         String senha = scanner.nextLine();

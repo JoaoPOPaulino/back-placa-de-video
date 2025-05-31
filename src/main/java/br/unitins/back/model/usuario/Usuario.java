@@ -1,5 +1,6 @@
 package br.unitins.back.model.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,14 +43,13 @@ public class Usuario extends DefaultEntity {
     @JoinTable(name = "usuario_telefone",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_telefone"))
-    private List<Telefone> telefones;
+    private List<Telefone> telefones = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_endereco",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_endereco"))
-    private List<Endereco> enderecos;
-
+    private List<Endereco> enderecos = new ArrayList<>();
     private String nomeImagem;
 
     public Usuario() {
@@ -63,14 +63,11 @@ public class Usuario extends DefaultEntity {
         this.senha = hashService.getHashSenha(dto.senha());
         this.perfil = Perfil.valueOf(dto.perfil());
 
-        if (dto.telefones() != null) {
-            this.telefones.clear();
-            this.telefones.addAll(dto.telefones().stream().map(Telefone::new).collect(Collectors.toList()));
+        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+            this.telefones = dto.telefones().stream().map(Telefone::new).collect(Collectors.toList());
         }
-
         if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-            this.enderecos.clear();
-            this.enderecos.addAll(dto.enderecos().stream().map(Endereco::new).collect(Collectors.toList()));
+            this.enderecos = dto.enderecos().stream().map(Endereco::new).collect(Collectors.toList());
         }
     }
 

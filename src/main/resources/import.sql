@@ -71,16 +71,20 @@ INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, 
 
 -- Usuarios
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('João Silva', 'joao@email.com', 'joao', 'yEaSZv1mx2Hf11tomtEAY3HUG2hrQS2ACE17U1PeCoA7PFIhHARbDredPke5UTKwvMVA+jod2rMVKSoDzm8p3Q==', 'USER');
+('João Silva', 'joao@email.com', 'joao', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'USER');
+-- senha 123
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Maria Souza', 'maria@email.com', 'maria', 'DzdKfFtHned4y7fLASqK0gH9EqUAMZgn6HuhapPc6l0ycYnZ/AZB2mFjbV5ADHvCpr8u3Vm8SkIIJ55gmKQDdA==', 'USER');
+('Maria Souza', 'maria@email.com', 'maria', '1BTSU7LatsY6BK9FYiXT9du++eWLisRMBwGyxbRSh0ZpH0p3jIIAWh1+Ta/zBagkeJa/NwPo5XngKb/REUH74g==', 'USER');
+-- senha 111
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Admin Sistema', 'admin@email.com', 'admin', 'cQa5YaODDHhULIAmdDvDQ/YyU9jAzqqhz1hzmFU7LB1CHLRrUEgu9r/O5cyup6ghql/1J5J60tVChoWwa5XL6Q==', 'ADMIN');
+('Admin Sistema', 'admin@email.com', 'admin', 'xyolfJJXZD9DlkfB2efO5EsTaPo0oB0Z3wcZ4c7guhVnzpswUQ42+7knYc7eAG40zmXrKe7b41Evi8pyZLd//A==', 'ADMIN');
+-- senha 222
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Carlos Oliveira', 'carlos@email.com', 'carlos', 'LwO8H16RGVo7K04ST5Lqh58GC1xsha5nCcMJPay3CBfjQ8bN0Jk3+COFXk5NdoGHnxM8KC/p1ehsgQyrbybqjQ==', 'USER');
+('Carlos Oliveira', 'carlos@email.com', 'carlos', 'BRVpCk1+DGvzjp5/FB65aArxUVaByFDm4xJtI8bKZrZEpEj4slXG0OrjrxCz5BvV9euVpFYG+Ba897WGPQlD1g==', 'USER');
+-- senha 333
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Ana Santos', 'ana@email.com', 'ana', 'IJ0d+ackrKX8mdfSDEnwvRxOTd6BNvnlyvWiBlX3Y5ecWIZs+KUWspDHcydPRPqDRpb32/K4hRUJgqqGpL5y2g==', 'USER');
-
+('Ana Santos', 'ana@email.com', 'ana', '7b6H1t+j+wF78ubzUKE1nywHSSZ2mUzrEDKwmAoBCiYuJ/3DWGT3QvQfhmaX+iwYJrYAb2PUOG9XV8fkiXW+fQ==', 'USER');
+-- senha 444
 
 -- Telefones
 INSERT INTO telefone (codigo_area, numero) VALUES ('11', '987654321');
@@ -138,7 +142,8 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (5, 6);
 
 -- Usuário com muitos telefones
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Teste Telefones', 'teste@email.com', 'teste', 'ncg8QgCKC47UwbAXpJhFadrqXg/mrlJW1Eh2En4J8Wf9N7+eEzNk5xwolTs5Jlg4VQKY1lWLUwYGJw6yu/eD+g==', 'USER');
+('Teste Telefones', 'teste@email.com', 'teste', '93QL7Y9NhbbGlrUMBFlozccxq5sw0v4kcfkoApn8hB5eVW9YCN8OsamwEyCIhjkdik/U9Khf+107XnTFnu/xkw==', 'USER');
+-- senha 555
 
 INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (6, 11);
 INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (6, 12);
@@ -149,14 +154,19 @@ INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (6, 15);
 
 -- Usuário sem telefone
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Sem Telefone', 'semtel@email.com', 'semtel', '+LtZs51LBOk4auZNQfaKRQlaTG0b6Zt8e7o2hDjHSRQy9Vlmy9uMQFBmc2Ghg6xwBpn+ZpvTJ6I6nug4l/ncDg==', 'USER');
+('Sem Telefone', 'semtel@email.com', 'semtel', 'H7rfcAXwQxE81ZnB/uXhEsJMEceqnOqy32gmn86SkaQ3iFbv4zHEt/kD4iwa+C8dVp99fGX2lPqFWRtSG5hzDw==', 'USER');
+-- semja 666
 
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('jp', 'jp@email.com', 'jp', 'w7rfqWj93EwRA2uVVL6OOV4zVbYSlD6zYc0cpbZPlu0grMSg+/JQwi0C3hlUfCkEbbkcbJKmEf7z3ce/lV2LTA==', 'USER');
+('jp', 'jp@email.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+-- senha: jpuser
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('jp', 'jpp@email.com', 'jpadmin', '3kMDwYFVHhdYGDgpKFkRJW66URYuNpsRfoJ+WnAqkBdVeas+zoypt0wtL5wMrvjpRUjbBFcWLv5ZJYaiDaPlmw==', 'ADMIN');
 -- senha: 12345678
 
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('jp', 'jpp@email.com', 'jpadmin', 'w7rfqWj93EwRA2uVVL6OOV4zVbYSlD6zYc0cpbZPlu0grMSg+/JQwi0C3hlUfCkEbbkcbJKmEf7z3ce/lV2LTA==', 'ADMIN');
--- senha: 12345678
+('testeete', 'testtee@email.com', 'teste123', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+-- senha: jpuser
 
 

@@ -119,8 +119,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioResponseDTO findByLoginAndSenha(String login, String senha) {
-        String hashSenha = hashService.getHashSenha(senha);
-        Usuario usuario = repository.findByLoginAndSenha(login, hashSenha);
+        Usuario usuario = repository.findByLoginAndSenha(login, senha);
         if (usuario == null) {
             throw new NotFoundException("Login ou senha inválidos");
         }
