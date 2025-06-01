@@ -16,6 +16,7 @@ INSERT INTO fabricante (nome) VALUES ('EVGA');
 INSERT INTO fabricante (nome) VALUES ('Zotac');
 INSERT INTO fabricante (nome) VALUES ('Sapphire');
 INSERT INTO fabricante (nome) VALUES ('PowerColor');
+INSERT INTO fabricante (nome) VALUES ('Teste');
 
 
 
@@ -40,6 +41,7 @@ INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VA
 INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VALUES ('4 GB GDDR6', '1.4 GHz', '128-bit', '90W');
 INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VALUES ('6 GB GDDR6X', '2.1 GHz', '192-bit', '210W');
 INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VALUES ('12 GB GDDR6X', '2.4 GHz', '384-bit', '370W');
+INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VALUES ('Teste', 'Teste', 'Teste', 'Teste');
 
 
 
@@ -66,6 +68,7 @@ INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, 
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15, 'ARCa580.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 4060 Ti', 3499.90, 19, 1, 'INTERMEDIARIA', 10, 'rtx4060ti.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7900 GRE', 5999.90, 20, 2, 'ALTO_DESEMPENHO', 6, 'rx7900gre.jpg');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.jpg');
 
 
 
