@@ -53,8 +53,8 @@ public class PlacaDeVideoResource {
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, @Valid PlacaDeVideoDTO dto) {
-        service.update(id, dto);
-        return Response.noContent().build();
+        PlacaDeVideoResponseDTO updated = service.update(id, dto);
+        return Response.ok(updated).build();
     }
 
     @DELETE
@@ -113,11 +113,11 @@ public class PlacaDeVideoResource {
     @Transactional
     public Response salvarImagemPlaca(@PathParam("id") Long id, @MultipartForm ImageForm form) {
         LOGGER.info("Iniciando upload de imagem para a placa de vídeo com ID: " + id);
+        LOGGER.info("Nome da imagem: " + form.getNomeImagem());
+        LOGGER.info("Tamanho da imagem: " + (form.getImagem() != null ? form.getImagem().length : 0));
         try {
-            // Corrigido: usando a instância injetada em vez de chamada estática
             String nomeImagem = fileService.salvar(form.getNomeImagem(), form.getImagem());
             PlacaDeVideoResponseDTO response = service.updateNomeImagem(id, nomeImagem);
-
             if (response == null) {
                 LOGGER.warn("Placa com ID: " + id + " não encontrado.");
                 return Response.status(Status.NOT_FOUND).entity("Imagem não encontrada").build();

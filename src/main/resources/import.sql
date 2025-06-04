@@ -334,4 +334,4 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);
 
 
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Luis', 'ambientallix.comercial01@gmail.com', 'luis', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+('Luiz', 'oliveiraluiz@unitins.br', 'luiz', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
