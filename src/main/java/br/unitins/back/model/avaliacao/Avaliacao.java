@@ -19,13 +19,18 @@ public class Avaliacao extends DefaultEntity {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name = "id_placa_de_video", nullable = false)
     private PlacaDeVideo placaDeVideo;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
     private Nota nota;
+
     @Column(columnDefinition = "TEXT")
     private String comentario;
+
     private LocalDateTime dataCriacao;
 
     @PrePersist

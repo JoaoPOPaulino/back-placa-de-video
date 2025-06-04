@@ -55,6 +55,8 @@ public class PlacaDeVideoServiceImpl implements PlacaDeVideoService {
         placa.setFabricante(fabricanteRepository.findById(dto.idFabricante()));
         placa.setCategoria(Categoria.valueOf(dto.idCategoria()));
         placa.setEstoque(dto.estoque());
+        placa.setDescricao(dto.descricao());
+        placa.setNomeImagem(dto.nomeImagem());
 
         EspecificacaoTecnica especificacao = especificacaoRepository.findById(dto.idEspecificacaoTecnica());
         if (especificacao == null) {

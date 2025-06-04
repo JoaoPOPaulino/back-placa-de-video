@@ -49,9 +49,8 @@ public class PlacaDeVideo extends DefaultEntity {
     @Column(nullable = false)
     private Integer estoque = 0;
 
-    // Construtores
-    public PlacaDeVideo() {
-    }
+    @Column(columnDefinition = "TEXT")
+    private String descricao;
 
     // Getters e Setters
     public String getNome() {
@@ -126,5 +125,13 @@ public class PlacaDeVideo extends DefaultEntity {
             throw new IllegalStateException("Estoque insuficiente");
         }
         this.estoque -= quantidade;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

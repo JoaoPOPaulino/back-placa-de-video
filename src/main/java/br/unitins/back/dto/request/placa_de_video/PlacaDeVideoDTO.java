@@ -21,6 +21,7 @@ public record PlacaDeVideoDTO(
         Integer estoque,
         @NotNull(message = "A especificação técnica é obrigatória.")
         Long idEspecificacaoTecnica,
-        String nomeImagem) {
+        String nomeImagem,
+        String descricao) {
 
 }
