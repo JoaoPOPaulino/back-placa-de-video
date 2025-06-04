@@ -2,7 +2,6 @@ package br.unitins.back.dto.response;
 
 import java.math.BigDecimal;
 
-import br.unitins.back.model.placa_de_video.Categoria;
 import br.unitins.back.model.placa_de_video.PlacaDeVideo;
 
 public record PlacaDeVideoResponseDTO(
@@ -11,7 +10,7 @@ public record PlacaDeVideoResponseDTO(
         BigDecimal preco,
         String nomeImagem,
         FabricanteResponseDTO fabricante,
-        Categoria categoria,
+        String categoria,
         Integer estoque,
         EspecificacaoTecnicaResponseDTO especificacaoTecnica,
         String descricao) {
@@ -23,7 +22,7 @@ public record PlacaDeVideoResponseDTO(
                 placa.getPreco(),
                 placa.getNomeImagem(),
                 FabricanteResponseDTO.valueOf(placa.getFabricante()),
-                placa.getCategoria(),
+                placa.getCategoria().getLabel(),
                 placa.getEstoque(),
                 EspecificacaoTecnicaResponseDTO.valueOf(placa.getEspecificacaoTecnica()),
                 placa.getDescricao()

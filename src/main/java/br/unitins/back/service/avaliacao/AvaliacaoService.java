@@ -11,11 +11,13 @@ public interface AvaliacaoService {
 
     AvaliacaoResponseDTO findById(Long id);
 
-    List<AvaliacaoResponseDTO> findAll();
+    List<AvaliacaoResponseDTO> findAll(Integer page, Integer pageSize);
 
     List<AvaliacaoResponseDTO> findByPlacaDeVideo(Long idPlacaDeVideo);
 
     AvaliacaoResponseDTO update(Long id, AvaliacaoDTO dto);
 
     void delete(Long id);
+
+    long count();
 }

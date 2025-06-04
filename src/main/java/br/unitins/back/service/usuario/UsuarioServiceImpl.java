@@ -2,6 +2,7 @@ package br.unitins.back.service.usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 
@@ -112,9 +113,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioResponseDTO> findAll() {
-        return repository.listAll().stream()
-                .map(UsuarioResponseDTO::valueOf).toList();
+    public List<UsuarioResponseDTO> findAll(Integer page, Integer pageSize) {
+        return repository.findAllOrdered()
+                .page(page, pageSize)
+                .list()
+                .stream()
+                .map(UsuarioResponseDTO::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override

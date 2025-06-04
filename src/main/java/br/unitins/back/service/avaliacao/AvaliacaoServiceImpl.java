@@ -48,10 +48,10 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         avaliacao.setComentario(dto.comentario());
         if (dto.nota() != null) {
             avaliacao.setNota(Nota.fromValor(dto.nota()));
-        } // Se nota for null, permanece null
+        }
 
         avaliacaoRepository.persist(avaliacao);
-        return new AvaliacaoResponseDTO(avaliacao);
+        return AvaliacaoResponseDTO.valueOf(avaliacao);
     }
 
     @Override
@@ -60,14 +60,16 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         if (avaliacao == null) {
             throw new NotFoundException("Avaliação não encontrada");
         }
-        return new AvaliacaoResponseDTO(avaliacao);
+        return AvaliacaoResponseDTO.valueOf(avaliacao);
     }
 
     @Override
-    public List<AvaliacaoResponseDTO> findAll() {
-        return avaliacaoRepository.listAll()
+    public List<AvaliacaoResponseDTO> findAll(Integer page, Integer pageSize) {
+        return avaliacaoRepository.findAllOrdered()
+                .page(page, pageSize)
+                .list()
                 .stream()
-                .map(AvaliacaoResponseDTO::new)
+                .map(AvaliacaoResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }
 
@@ -75,7 +77,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     public List<AvaliacaoResponseDTO> findByPlacaDeVideo(Long idPlacaDeVideo) {
         return avaliacaoRepository.findByPlacaDeVideo(idPlacaDeVideo)
                 .stream()
-                .map(AvaliacaoResponseDTO::new)
+                .map(AvaliacaoResponseDTO::valueOf)
                 .collect(Collectors.toList());
     }
 
@@ -107,7 +109,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         }
 
         avaliacaoRepository.persist(avaliacao);
-        return new AvaliacaoResponseDTO(avaliacao);
+        return AvaliacaoResponseDTO.valueOf(avaliacao);
     }
 
     @Override
@@ -119,4 +121,10 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         }
         avaliacaoRepository.delete(avaliacao);
     }
+
+    @Override
+    public long count() {
+        return avaliacaoRepository.count();
+    }
+
 }

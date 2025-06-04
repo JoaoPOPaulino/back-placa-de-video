@@ -18,7 +18,7 @@ public interface UsuarioService {
 
     List<UsuarioResponseDTO> findByNome(String nome);
 
-    List<UsuarioResponseDTO> findAll();
+    List<UsuarioResponseDTO> findAll(Integer page, Integer pageSize);
 
     UsuarioResponseDTO findByLoginAndSenha(String login, String senha);
 

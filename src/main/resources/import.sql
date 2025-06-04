@@ -162,3 +162,172 @@ INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCria
 (10, 10, 'CINCO', 'Perfeita para renderização e jogos pesados.', '2025-05-01 19:30:00');
 INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
 (5, 15, 'QUATRO', 'Ótima placa, mas o cooler é um pouco barulhento.', '2025-06-01 11:10:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(3, 2, 'QUATRO', 'Boa performance em jogos em 1440p, mas esquenta bastante', '2024-10-08 15:22:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(4, 3, 'CINCO', 'Absolutamente incrível para jogos em 4K e edição de vídeo', '2024-10-12 09:45:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(5, 6, 'QUATRO', 'AMD acertou com esta placa, competidora direta das RTX', '2024-10-18 17:30:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(6, 9, 'TRES', 'Boa para o básico, mas não espere milagres', '2024-10-22 11:20:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(7, 11, 'CINCO', 'Melhor custo-benefício na categoria alto desempenho', '2024-10-25 14:15:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(8, 12, 'UM', 'Muito fraca, não atende às expectativas mínimas', '2024-10-30 10:00:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(9, 13, 'QUATRO', 'Placa veterana que ainda entrega bom desempenho', '2024-11-05 16:45:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(1, 14, 'TRES', 'Boa, mas já está mostrando a idade em jogos novos', '2024-11-12 13:10:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(2, 16, 'CINCO', 'Monstro absoluto para trabalho profissional', '2024-11-18 18:20:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(3, 17, 'QUATRO', 'Ótima opção intermediária da AMD', '2024-11-22 12:30:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(4, 18, 'DOIS', 'Performance abaixo do esperado para o preço', '2024-11-28 09:15:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(5, 19, 'QUATRO', 'Excelente upgrade da série 3060', '2024-12-03 14:50:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(6, 20, 'CINCO', 'AMD acertou em cheio com esta versão GRE', '2024-12-10 17:25:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(7, 1, 'CINCO', 'Depois de 3 meses de uso, continua impecável', '2024-12-15 11:40:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(8, 2, 'TRES', 'Boa, mas drivers ainda precisam melhorar', '2024-12-20 10:05:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(9, 3, 'CINCO', 'Não existe jogo que esta placa não rode no máximo', '2024-12-25 15:30:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(1, 5, 'QUATRO', 'Potência bruta, mas o preço é salgado', '2025-01-05 14:15:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(2, 7, 'TRES', 'Cumpriu bem para jogos mais antigos', '2025-01-12 09:50:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(3, 10, 'CINCO', 'Perfeita para meu setup de streaming', '2025-01-18 16:35:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(4, 15, 'QUATRO', 'NVIDIA continua dominando o mercado high-end', '2025-01-25 12:20:00');
+INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
+(5, 19, 'CINCO', 'Melhor placa intermediária que já tive', '2025-02-01 18:10:00');
+
+
+-- Novos usuários (11 a 25)
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Pedro Almeida', 'pedro@email.com', 'pedro', 'XUv4J7Kz9PwQmRnVpYsWt2x5z8BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: pedro123
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Fernanda Lima', 'fernanda@email.com', 'fernanda', 'YhV5K8L0aQxSnWt3y6z9BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: fernanda456
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Ricardo Oliveira', 'ricardo@email.com', 'ricardo', 'ZiW6L9M1bRyToXu4a7c0DvEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: ricardo789
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Camila Santos', 'camila@email.com', 'camila', 'AjX7M0N2cSzUpYv5b8d1EwFgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: camila101
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Lucas Pereira', 'lucas@email.com', 'lucas', 'BkY8N1O3dTaVqZw6c9e2FxGgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: lucas202
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Juliana Costa', 'juliana@email.com', 'juliana', 'ClZ9O2P4eUbWrAx7d0f3GyHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: juliana303
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Marcos Ribeiro', 'marcos@email.com', 'marcos', 'Dm0P3Q5fVcXsBy8e1g4HzIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
+-- senha: marcos404
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Patricia Alves', 'patricia@email.com', 'patricia', 'En1Q4R6gWdYtCz9f2h5I0JjKlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
+-- senha: patricia505
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Gustavo Ferreira', 'gustavo@email.com', 'gustavo', 'Fo2R5S7hXeZuD0g3i6J1KkLlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
+-- senha: gustavo606
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Isabela Martins', 'isabela@email.com', 'isabela', 'Gp3S6T8iYfAvE1h4j7K2LlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
+-- senha: isabela707
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Roberto Nunes', 'roberto@email.com', 'roberto', 'Hq4T7U9jZgBwF2i5k8L3MmNnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER');
+-- senha: roberto808
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Amanda Dias', 'amanda@email.com', 'amanda', 'Ir5U8V0kAhCxG3j6l9M4NnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER');
+-- senha: amanda909
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Felipe Rocha', 'felipe@email.com', 'felipe', 'Js6V9W1lBiDyH4k7m0N5OoPpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'USER');
+-- senha: felipe010
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Tatiane Gomes', 'tatiane@email.com', 'tatiane', 'Kt7W0X2mCjEzI5l8n1O6PpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'ADMIN');
+-- senha: tatiane111
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Rodrigo Barbosa', 'rodrigo@email.com', 'rodrigo', 'Lu8X1Y3nDkFaJ6m9o2P7QqRrTt4uVvWwXxYyZz0A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6', 'ADMIN');
+-- senha: rodrigo222
+
+-- Novos telefones (16 a 30)
+INSERT INTO telefone (codigo_area, numero) VALUES ('11', '666666666');
+INSERT INTO telefone (codigo_area, numero) VALUES ('21', '777777777');
+INSERT INTO telefone (codigo_area, numero) VALUES ('31', '888888888');
+INSERT INTO telefone (codigo_area, numero) VALUES ('41', '999999999');
+INSERT INTO telefone (codigo_area, numero) VALUES ('51', '101010101');
+INSERT INTO telefone (codigo_area, numero) VALUES ('11', '121212121');
+INSERT INTO telefone (codigo_area, numero) VALUES ('21', '131313131');
+INSERT INTO telefone (codigo_area, numero) VALUES ('31', '141414141');
+INSERT INTO telefone (codigo_area, numero) VALUES ('41', '151515151');
+INSERT INTO telefone (codigo_area, numero) VALUES ('51', '161616161');
+INSERT INTO telefone (codigo_area, numero) VALUES ('11', '171717171');
+INSERT INTO telefone (codigo_area, numero) VALUES ('21', '181818181');
+INSERT INTO telefone (codigo_area, numero) VALUES ('31', '191919191');
+INSERT INTO telefone (codigo_area, numero) VALUES ('41', '202020202');
+INSERT INTO telefone (codigo_area, numero) VALUES ('51', '212121212');
+
+-- Novos endereços (7 a 15)
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('80010010', 'PR', 'Curitiba', 'Q7', 'Rua XV de Novembro', 700);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('50010010', 'PE', 'Recife', 'Q8', 'Rua do Riachuelo', 800);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('60010010', 'CE', 'Fortaleza', 'Q9', 'Rua Barão do Rio Branco', 900);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('30010010', 'MG', 'Belo Horizonte', 'Q10', 'Av. Amazonas', 1000);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('13010010', 'SP', 'Campinas', 'Q11', 'Rua José Paulino', 1100);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('14010010', 'SP', 'Ribeirão Preto', 'Q12', 'Av. Independência', 1200);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('29010010', 'ES', 'Vitória', 'Q13', 'Rua Sete de Setembro', 1300);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('57010010', 'AL', 'Maceió', 'Q14', 'Rua do Comércio', 1400);
+INSERT INTO endereco (cep, estado, cidade, quadra, rua, numero) VALUES
+('88010010', 'SC', 'Florianópolis', 'Q15', 'Rua Felipe Schmidt', 1500);
+
+-- Relacionando telefones com usuários
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (11, 16);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (12, 17);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (13, 18);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (14, 19);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (15, 20);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (16, 21);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (17, 22);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (18, 23);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (19, 24);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (20, 25);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (21, 26);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (22, 27);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (23, 28);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (24, 29);
+INSERT INTO usuario_telefone (id_usuario, id_telefone) VALUES (25, 30);
+
+-- Relacionando endereços com usuários
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (11, 7);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (12, 8);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (13, 9);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (14, 10);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (15, 11);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (16, 12);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (17, 13);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (18, 14);
+INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);

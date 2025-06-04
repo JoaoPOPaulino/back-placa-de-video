@@ -19,7 +19,7 @@ public record UsuarioDTO(
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres.")
         String senha,
         @NotBlank(message = "O perfil não pode ser vazio.")
-        String perfil,
+        Integer perfil,
         List<TelefoneDTO> telefones,
         List<EnderecoDTO> enderecos,
         String nomeImagem) {

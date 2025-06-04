@@ -2,6 +2,7 @@ package br.unitins.back.resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -16,6 +17,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
@@ -23,6 +25,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
@@ -70,11 +73,10 @@ public class UsuarioResource {
     }
 
     @GET
-    public Response findAll() {
-        LOGGER.info("Buscando todos os usuários");
-        Response response = Response.ok(service.findAll()).build();
-        LOGGER.info("Usuários recuperados com sucesso");
-        return response;
+    public List<UsuarioResponseDTO> findAll(
+            @QueryParam("page") @DefaultValue("0") Integer page,
+            @QueryParam("pageSize") @DefaultValue("8") Integer pageSize) {
+        return service.findAll(page, pageSize);
     }
 
     @GET
@@ -102,15 +104,11 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/exists/{login}")
-    public Response existsByLogin(@PathParam("login") String login) {
-        try {
-            boolean exists = service.existsByLogin(login);
-            return Response.ok(exists).build();
-        } catch (Exception e) {
-            LOGGER.error("Erro ao verificar login", e);
-            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-        }
+    @Path("/exists")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificarSeExisteLogin(@QueryParam("login") String login) {
+        boolean existe = service.existsByLogin(login);
+        return Response.ok(existe).build();
     }
 
     @PATCH
