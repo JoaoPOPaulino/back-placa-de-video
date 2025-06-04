@@ -17,7 +17,7 @@ public record AvaliacaoResponseDTO(
                 avaliacao.getId(),
                 avaliacao.getUsuario().getId(),
                 avaliacao.getPlacaDeVideo().getId(),
-                avaliacao.getNota() != null ? avaliacao.getNota().getValor() : null,
+                avaliacao.getNota() != null ? avaliacao.getNota().getId() : null,
                 avaliacao.getComentario(),
                 avaliacao.getDataCriacao()
         );

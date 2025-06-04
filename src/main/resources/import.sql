@@ -55,7 +55,7 @@ INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, 
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15, 'ARCa580.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 4060 Ti', 3499.90, 19, 1, 'INTERMEDIARIA', 10, 'rtx4060ti.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7900 GRE', 5999.90, 20, 2, 'ALTO_DESEMPENHO', 6, 'rx7900gre.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.jpg');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.png');
 
 -- Usuarios
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
@@ -80,7 +80,7 @@ INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
 ('Sem Telefone', 'semtel@email.com', 'semtel', 'H7rfcAXwQxE81ZnB/uXhEsJMEceqnOqy32gmn86SkaQ3iFbv4zHEt/kD4iwa+C8dVp99fGX2lPqFWRtSG5hzDw==', 'USER');
 -- senha 666
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('jp', 'jp@email.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+('jp', 'joaopedrojpjp4@gmail.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
 -- senha: jpuser
 INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
 ('jp', 'jpp@email.com', 'jpadmin', 'AMeHn4LlleJ3bhBYsIegH+ePHp+t7XprZ2pACpKh3XtZqun1vZvKmMNYYYHbI5XL75EYZfxWuc8TWwbCeeqv9w==', 'ADMIN');
@@ -331,3 +331,7 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (16, 12);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (17, 13);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (18, 14);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);
+
+
+INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
+('Luis', 'ambientallix.comercial01@gmail.com', 'luis', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');

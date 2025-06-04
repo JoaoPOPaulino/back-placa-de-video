@@ -36,7 +36,6 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         if (usuario == null) {
             throw new NotFoundException("Usuário não encontrado");
         }
-
         PlacaDeVideo placaDeVideo = placaDeVideoRepository.findById(dto.idPlacaDeVideo());
         if (placaDeVideo == null) {
             throw new NotFoundException("Placa de vídeo não encontrada");
@@ -47,7 +46,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         avaliacao.setPlacaDeVideo(placaDeVideo);
         avaliacao.setComentario(dto.comentario());
         if (dto.nota() != null) {
-            avaliacao.setNota(Nota.fromValor(dto.nota()));
+            avaliacao.setNota(Nota.valueOf(dto.nota()));
         }
 
         avaliacaoRepository.persist(avaliacao);
@@ -103,7 +102,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         avaliacao.setPlacaDeVideo(placaDeVideo);
         avaliacao.setComentario(dto.comentario());
         if (dto.nota() != null) {
-            avaliacao.setNota(Nota.fromValor(dto.nota()));
+            avaliacao.setNota(Nota.valueOf(dto.nota()));
         } else {
             avaliacao.setNota(null);
         }

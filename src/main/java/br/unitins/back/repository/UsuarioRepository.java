@@ -19,6 +19,10 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("login", login).firstResult();
     }
 
+    public Usuario findByEmail(String email) {
+        return find("email", email).firstResult();
+    }
+
     public boolean existsByLogin(String login) {
         return count("login = ?1", login) > 0;
     }

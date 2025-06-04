@@ -194,4 +194,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
+    @Override
+    public UsuarioResponseDTO findByEmail(String email) {
+        Usuario usuario = repository.findByLogin(email);
+        if (usuario == null) {
+            throw new ValidationException("email", "Email não encontrado");
+        }
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
 }

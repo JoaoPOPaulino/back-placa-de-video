@@ -8,28 +8,30 @@ public enum Nota {
     CINCO("Excelente", 5);
 
     private final String label;
-    private final Integer valor;
+    private final Integer id;
 
-    Nota(String label, Integer valor) {
+    Nota(String label, Integer id) {
         this.label = label;
-        this.valor = valor;
+        this.id = id;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public Integer getValor() {
-        return valor;
+    public Integer getId() {
+        return id;
     }
 
-    public static Nota fromValor(Integer valor) {
+    public static Nota valueOf(Integer id) throws IllegalArgumentException {
+        if (id == null)
+            return null;
         for (Nota nota : Nota.values()) {
-            if (nota.getValor() == valor) {
+            if (nota.getId().equals(id)) {
                 return nota;
             }
         }
-        throw new IllegalArgumentException("Nota inválida: " + valor);
+        throw new IllegalArgumentException("Nota inválida: " + id);
     }
 
 }
