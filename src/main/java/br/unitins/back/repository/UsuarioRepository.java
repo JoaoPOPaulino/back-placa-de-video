@@ -19,12 +19,16 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("login", login).firstResult();
     }
 
+    public Usuario findByCpf(String cpf) {
+        return find("cpf", cpf).firstResult();
+    }
+
     public Usuario findByEmail(String email) {
         return find("email", email).firstResult();
     }
 
     public boolean existsByLogin(String login) {
-        return count("login = ?1", login) > 0;
+        return count("login", login) > 0;
     }
 
     public boolean existsByEmail(String email) {
@@ -32,11 +36,11 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
     }
 
     public Usuario findByLoginAndSenha(String login, String senha) {
-        return find("login = ?1 AND senha = ?2 ", login, senha).firstResult();
+        return find("login = ?1 and senha = ?2", login, senha).firstResult();
     }
 
     public Usuario findByEmailAndSenha(String email, String senha) {
-        return find("email = ?1 AND senha = ?2", email, senha).firstResult();
+        return find("email = ?1 and senha = ?2", email, senha).firstResult();
     }
 
     public Usuario findByLoginOrEmail(String loginOrEmail) {
@@ -50,4 +54,5 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
     public PanacheQuery<Usuario> findAllOrdered() {
         return find("ORDER BY nome ASC");
     }
+
 }

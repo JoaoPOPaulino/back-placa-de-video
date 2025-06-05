@@ -23,12 +23,15 @@ public enum StatusPedido {
         return label;
     }
 
-    public static StatusPedido fromString(String status) {
-        for (StatusPedido tipo : StatusPedido.values()) {
-            if (tipo.name().equalsIgnoreCase(status)) {
-                return tipo;
+    public static StatusPedido valueOf(Integer id) throws IllegalArgumentException {
+        if ((id == null)) {
+            return null;
+        }
+        for (StatusPedido statusPedido : StatusPedido.values()) {
+            if (statusPedido.getId().equals(id)) {
+                return statusPedido;
             }
         }
-        throw new IllegalArgumentException("Status do Pedido: " + status);
+        throw new IllegalArgumentException("Id inválido: " + id);
     }
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.unitins.back.model.DefaultEntity;
+import br.unitins.back.model.pedido.Pedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -12,6 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 
 @Entity
@@ -27,6 +29,9 @@ public abstract class Pagamento extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     private StatusPagamento status;
+
+    @ManyToOne
+    private Pedido pedido;
 
     @PrePersist
     protected void onCreate() {
@@ -57,6 +62,14 @@ public abstract class Pagamento extends DefaultEntity {
 
     public void setStatus(StatusPagamento status) {
         this.status = status;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
 }

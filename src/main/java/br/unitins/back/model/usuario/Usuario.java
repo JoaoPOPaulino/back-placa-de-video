@@ -39,6 +39,9 @@ public class Usuario extends DefaultEntity {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
+    @NotBlank(message = "O CPF não pode ser vazio.") // Adiciona validação
+    private String cpf; // Novo campo
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_telefone",
             joinColumns = @JoinColumn(name = "id_usuario"),
@@ -53,7 +56,6 @@ public class Usuario extends DefaultEntity {
     private String nomeImagem;
 
     public Usuario() {
-
     }
 
     public Usuario(UsuarioDTO dto, HashService hashService) {
@@ -62,7 +64,7 @@ public class Usuario extends DefaultEntity {
         this.login = dto.login();
         this.senha = hashService.getHashSenha(dto.senha());
         this.perfil = Perfil.valueOf(dto.perfil());
-
+        this.cpf = dto.cpf(); // Adiciona CPF
         if (dto.telefones() != null && !dto.telefones().isEmpty()) {
             this.telefones = dto.telefones().stream().map(Telefone::new).collect(Collectors.toList());
         }
@@ -75,18 +77,16 @@ public class Usuario extends DefaultEntity {
         this.nome = dto.nome();
         this.email = dto.email();
         this.login = dto.login();
-
         if (dto.senha() != null && !dto.senha().isEmpty()) {
             this.senha = hashService.getHashSenha(dto.senha());
         }
         this.perfil = Perfil.valueOf(dto.perfil());
-
+        this.cpf = dto.cpf(); // Adiciona CPF
         if (dto.telefones() != null && !dto.telefones().isEmpty()) {
             this.telefones = dto.telefones().stream()
                     .map(Telefone::new)
                     .collect(Collectors.toList());
         }
-
         if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
             this.enderecos = dto.enderecos().stream()
                     .map(Endereco::new)
@@ -94,6 +94,7 @@ public class Usuario extends DefaultEntity {
         }
     }
 
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -134,6 +135,14 @@ public class Usuario extends DefaultEntity {
         this.perfil = perfil;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public List<Telefone> getTelefones() {
         return telefones;
     }
@@ -150,16 +159,16 @@ public class Usuario extends DefaultEntity {
         this.enderecos = enderecos;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario [nome=" + nome + ", email=" + email + ", login=" + login + ", perfil=" + perfil + "]";
-    }
-
     public String getNomeImagem() {
         return nomeImagem;
     }
 
     public void setNomeImagem(String nomeImagem) {
         this.nomeImagem = nomeImagem;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [nome=" + nome + ", email=" + email + ", login=" + login + ", perfil=" + perfil + ", cpf=" + cpf + "]";
     }
 }

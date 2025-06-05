@@ -14,6 +14,7 @@ import br.unitins.back.service.hash.HashService;
 import br.unitins.back.service.jwt.JwtService;
 import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -48,21 +49,31 @@ public class AuthResource {
     public Response login(AuthUsuarioDTO authDTO) {
         LOGGER.info("Tentando login para o usuário: {}", authDTO.login());
         String hash = hashService.getHashSenha(authDTO.senha());
-        LOGGER.debug("Hash gerado: {}", hash);
-        UsuarioResponseDTO usuario = service.findByLoginAndSenha(authDTO.login(), hash);
+        LOGGER.debug("Hash da senha fornecida: {}", hash); // ← Para debug apenas
+
+        Usuario usuario = usuarioRepository.findByLoginAndSenha(authDTO.login(), hash);
 
         if (usuario == null) {
-            LOGGER.warn("Usuário não encontrado para o login: {}", authDTO.login());
-            return Response.status(Status.NOT_FOUND)
-                    .entity("Usuario não encontrado").build();
+            // Verificar se o usuário existe mas a senha está errada
+            Usuario usuarioExistente = usuarioRepository.findByLogin(authDTO.login());
+            if (usuarioExistente != null) {
+                LOGGER.warn("Usuário {} existe, mas senha está incorreta", authDTO.login());
+                LOGGER.debug("Senha armazenada no BD: {}", usuarioExistente.getSenha()); // ← Para debug apenas
+            } else {
+                LOGGER.warn("Usuário {} não encontrado", authDTO.login());
+            }
+            return Response.status(Status.UNAUTHORIZED)
+                    .entity(Map.of("message", "Login ou senha inválidos")).build();
         }
-        LOGGER.info("Usuário encontrado: {}", usuario.login());
-        return Response.ok(usuario)
-                .header("Authorization", jwtService.generateJwt(usuario))
-                .build();
 
+        LOGGER.info("Login realizado com sucesso para usuário: {}", usuario.getLogin());
+        UsuarioResponseDTO usuarioResponse = UsuarioResponseDTO.valueOf(usuario);
+
+        return Response.ok(usuarioResponse)
+                .header("Authorization", "Bearer " + jwtService.generateJwt(usuarioResponse))
+                .build();
     }
-    
+
     @POST
     @Path("/solicitar-recuperacao")
     public Response solicitarRecuperacaoSenha(Map<String, String> payload) {
@@ -81,33 +92,50 @@ public class AuthResource {
 
     @POST
     @Path("/resetar-senha")
+    @Transactional // ← ADICIONAR esta anotação
     public Response redefinirSenha(Map<String, String> payload) {
         String token = payload.get("token");
         String novaSenha = payload.get("novaSenha");
 
         if (token == null || novaSenha == null || novaSenha.length() < 6) {
-            return Response.status(Status.BAD_REQUEST).entity("Token ou nova senha inválidos.").build();
+            return Response.status(Status.BAD_REQUEST)
+                    .entity("Token ou nova senha inválidos.").build();
         }
 
-        String email = passwordResetService.getEmailFromToken(token);
-        if (email == null) {
-            return Response.status(Status.BAD_REQUEST).entity("Token expirado ou inválido.").build();
+        String emailOuLogin = passwordResetService.getEmailFromToken(token);
+        if (emailOuLogin == null) {
+            return Response.status(Status.BAD_REQUEST)
+                    .entity("Token expirado ou inválido.").build();
         }
 
-        Usuario usuario = service.findByLogin(email) != null ? 
-                        usuarioRepository.findByLogin(email) : 
-                        usuarioRepository.findByEmail(email);
+        // Buscar usuário de forma correta
+        Usuario usuario = usuarioRepository.findByEmail(emailOuLogin);
+        if (usuario == null) {
+            usuario = usuarioRepository.findByLogin(emailOuLogin);
+        }
 
         if (usuario == null) {
-            return Response.status(Status.NOT_FOUND).entity("Usuário não encontrado").build();
+            LOGGER.warn("Usuário não encontrado para email/login: {}", emailOuLogin);
+            return Response.status(Status.NOT_FOUND)
+                    .entity("Usuário não encontrado").build();
         }
 
-        usuario.setSenha(hashService.getHashSenha(novaSenha));
-        usuarioRepository.persist(usuario);
+        // Log para debug
+        LOGGER.info("Atualizando senha para usuário: {} (ID: {})", usuario.getLogin(), usuario.getId());
+
+        // Definir nova senha
+        String novaSenhaHash = hashService.getHashSenha(novaSenha);
+        usuario.setSenha(novaSenhaHash);
+
+        // Usar merge ao invés de persist para entidades existentes
+        usuarioRepository.getEntityManager().merge(usuario);
+
+        // Ou simplesmente não chame nada, pois a entidade já está managed dentro da transação
+        // Log para confirmar
+        LOGGER.info("Senha atualizada com sucesso para usuário ID: {}", usuario.getId());
 
         passwordResetService.invalidateToken(token);
 
-        return Response.ok("Senha redefinida com sucesso!").build();
+        return Response.ok(Map.of("message", "Senha redefinida com sucesso!")).build();
     }
-
 }

@@ -20,8 +20,12 @@ public record UsuarioDTO(
         String senha,
         @NotBlank(message = "O perfil não pode ser vazio.")
         Integer perfil,
+        @NotBlank(message = "O CPF não pode ser vazio.")
+        @Size(min = 11, max = 11, message = "O CPF deve conter 11 dígitos.")
+        String cpf,
         List<TelefoneDTO> telefones,
         List<EnderecoDTO> enderecos,
-        String nomeImagem) {
+        String nomeImagem
+        ) {
 
 }

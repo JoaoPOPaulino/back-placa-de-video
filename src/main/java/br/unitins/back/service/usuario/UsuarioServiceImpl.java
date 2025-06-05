@@ -42,8 +42,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO insert(@Valid UsuarioDTO dto) {
-        if (repository.existsByLogin((dto.login()))) {
+        if (repository.existsByLogin(dto.login())) {
             throw new IllegalArgumentException("Login já está em uso");
+        }
+        if (repository.existsByEmail(dto.email())) {
+            throw new IllegalArgumentException("E-mail já está em uso");
+        }
+        if (repository.find("cpf", dto.cpf()).count() > 0) { // Valida CPF único
+            throw new IllegalArgumentException("CPF já está em uso");
         }
         Usuario usuario = new Usuario();
         mapDtoToEntity(dto, usuario);
@@ -58,6 +64,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuario == null) {
             throw new NotFoundException("Usuário não encontrado");
         }
+        if (!usuario.getEmail().equals(dto.email()) && repository.existsByEmail(dto.email())) {
+            throw new IllegalArgumentException("E-mail já está em uso");
+        }
+        if (!usuario.getCpf().equals(dto.cpf()) && repository.find("cpf", dto.cpf()).count() > 0) {
+            throw new IllegalArgumentException("CPF já está em uso");
+        }
         mapDtoToEntity(dto, usuario);
         return UsuarioResponseDTO.valueOf(usuario);
     }
@@ -67,7 +79,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEmail(dto.email());
         usuario.setLogin(dto.login());
         usuario.setSenha(hashService.getHashSenha(dto.senha()));
-        usuario.setPerfil(Perfil.valueOf(dto.perfil()));
+        usuario.setCpf(dto.cpf());
+
+        switch (dto.perfil()) {
+            case 1:
+                usuario.setPerfil(Perfil.USER);
+                break;
+            case 2:
+                usuario.setPerfil(Perfil.ADMIN);
+                break;
+            default:
+                throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
+        }
 
         usuario.setTelefones(new ArrayList<>());
         usuario.setEnderecos(new ArrayList<>());
@@ -76,15 +99,17 @@ public class UsuarioServiceImpl implements UsuarioService {
                 Telefone telefone = new Telefone(telDto);
                 usuario.getTelefones().add(telefone);
             }
-            if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-                for (EnderecoDTO endDto : dto.enderecos()) {
-                    Endereco endereco = new Endereco(endDto);
-                    usuario.getEnderecos().add(endereco);
-                }
+        }
+        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+            for (EnderecoDTO endDto : dto.enderecos()) {
+                Endereco endereco = new Endereco(endDto);
+                usuario.getEnderecos().add(endereco);
             }
         }
+        usuario.setNomeImagem(dto.nomeImagem());
     }
 
+    // Outros métodos permanecem inalterados
     @Override
     @Transactional
     public void delete(Long id) {
@@ -104,12 +129,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<UsuarioResponseDTO> findByNome(String nome) {
-        List<Usuario> usuarios = repository.findByNome(nome);
-        List<UsuarioResponseDTO> dtos = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
-            dtos.add(UsuarioResponseDTO.valueOf(usuario));
-        }
-        return dtos;
+        return repository.findByNome(nome).stream()
+                .map(UsuarioResponseDTO::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -124,7 +146,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioResponseDTO findByLoginAndSenha(String login, String senha) {
-        Usuario usuario = repository.findByLoginAndSenha(login, senha);
+        Usuario usuario = repository.findByLoginAndSenha(login, hashService.getHashSenha(senha));
         if (usuario == null) {
             throw new NotFoundException("Login ou senha inválidos");
         }
@@ -153,17 +175,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDTO findByLoginOrEmailAndSenha(String loginOuEmail, String senha) {
         String hashSenha = hashService.getHashSenha(senha);
-
         Usuario usuario = repository.findByLoginAndSenha(loginOuEmail, hashSenha);
-
         if (usuario == null) {
             usuario = repository.findByEmailAndSenha(loginOuEmail, hashSenha);
         }
-
         if (usuario == null) {
             throw new NotFoundException("Login ou senha inválidos");
         }
-
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
@@ -190,13 +208,26 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public UsuarioResponseDTO updateNomeImagem(Long id, String nomeImagem) {
         Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
         usuario.setNomeImagem(nomeImagem);
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
     @Override
+    @Transactional
+    public void updateSenha(Long id, String novaSenha) {
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        usuario.setSenha(hashService.getHashSenha(novaSenha));
+    }
+
+    @Override
     public UsuarioResponseDTO findByEmail(String email) {
-        Usuario usuario = repository.findByLogin(email);
+        Usuario usuario = repository.findByEmail(email);
         if (usuario == null) {
             throw new ValidationException("email", "Email não encontrado");
         }

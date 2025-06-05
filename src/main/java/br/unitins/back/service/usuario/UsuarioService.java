@@ -38,4 +38,5 @@ public interface UsuarioService {
 
     UsuarioResponseDTO updateNomeImagem(Long id, String nomeImagem);
 
+    void updateSenha(Long id, String senha);
 }

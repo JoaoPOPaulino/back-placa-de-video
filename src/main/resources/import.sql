@@ -55,38 +55,86 @@ INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, 
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15, 'ARCa580.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 4060 Ti', 3499.90, 19, 1, 'INTERMEDIARIA', 10, 'rtx4060ti.jpg');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7900 GRE', 5999.90, 20, 2, 'ALTO_DESEMPENHO', 6, 'rx7900gre.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.png');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.jpg');
 
 -- Usuarios
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('João Silva', 'joao@email.com', 'joao', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('João Silva', 'joao@email.com', 'joao', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'USER', '12345678901');
 -- senha 123
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Maria Souza', 'maria@email.com', 'maria', '1BTSU7LatsY6BK9FYiXT9du++eWLisRMBwGyxbRSh0ZpH0p3jIIAWh1+Ta/zBagkeJa/NwPo5XngKb/REUH74g==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Maria Souza', 'maria@email.com', 'maria', '1BTSU7LatsY6BK9FYiXT9du++eWLisRMBwGyxbRSh0ZpH0p3jIIAWh1+Ta/zBagkeJa/NwPo5XngKb/REUH74g==', 'USER', '23456789012');
 -- senha 111
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Admin Sistema', 'admin@email.com', 'admin', 'xyolfJJXZD9DlkfB2efO5EsTaPo0oB0Z3wcZ4c7guhVnzpswUQ42+7knYc7eAG40zmXrKe7b41Evi8pyZLd//A==', 'ADMIN');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Admin Sistema', 'admin@email.com', 'admin', 'xyolfJJXZD9DlkfB2efO5EsTaPo0oB0Z3wcZ4c7guhVnzpswUQ42+7knYc7eAG40zmXrKe7b41Evi8pyZLd//A==', 'ADMIN', '34567890123');
 -- senha 222
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Carlos Oliveira', 'carlos@email.com', 'carlos', 'BRVpCk1+DGvzjp5/FB65aArxUVaByFDm4xJtI8bKZrZEpEj4slXG0OrjrxCz5BvV9euVpFYG+Ba897WGPQlD1g==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Carlos Oliveira', 'carlos@email.com', 'carlos', 'BRVpCk1+DGvzjp5/FB65aArxUVaByFDm4xJtI8bKZrZEpEj4slXG0OrjrxCz5BvV9euVpFYG+Ba897WGPQlD1g==', 'USER', '45678901234');
 -- senha 333
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Ana Santos', 'ana@email.com', 'ana', '7b6H1t+j+wF78ubzUKE1nywHSSZ2mUzrEDKwmAoBCiYuJ/3DWGT3QvQfhmaX+iwYJrYAb2PUOG9XV8fkiXW+fQ==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Ana Santos', 'ana@email.com', 'ana', '7b6H1t+j+wF78ubzUKE1nywHSSZ2mUzrEDKwmAoBCiYuJ/3DWGT3QvQfhmaX+iwYJrYAb2PUOG9XV8fkiXW+fQ==', 'USER', '56789012345');
 -- senha 444
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Teste Telefones', 'teste@email.com', 'teste', '93QL7Y9NhbbGlrUMBFlozccxq5sw0v4kcfkoApn8hB5eVW9YCN8OsamwEyCIhjkdik/U9Khf+107XnTFnu/xkw==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Teste Telefones', 'teste@email.com', 'teste', '93QL7Y9NhbbGlrUMBFlozccxq5sw0v4kcfkoApn8hB5eVW9YCN8OsamwEyCIhjkdik/U9Khf+107XnTFnu/xkw==', 'USER', '67890123456');
 -- senha 555
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Sem Telefone', 'semtel@email.com', 'semtel', 'H7rfcAXwQxE81ZnB/uXhEsJMEceqnOqy32gmn86SkaQ3iFbv4zHEt/kD4iwa+C8dVp99fGX2lPqFWRtSG5hzDw==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Sem Telefone', 'semtel@email.com', 'semtel', 'H7rfcAXwQxE81ZnB/uXhEsJMEceqnOqy32gmn86SkaQ3iFbv4zHEt/kD4iwa+C8dVp99fGX2lPqFWRtSG5hzDw==', 'USER', '78901234567');
 -- senha 666
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('jp', 'joaopedrojpjp4@gmail.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('jp', 'joaopedrojpjp4@gmail.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '89012345678');
 -- senha: jpuser
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('jp', 'jpp@email.com', 'jpadmin', 'AMeHn4LlleJ3bhBYsIegH+ePHp+t7XprZ2pACpKh3XtZqun1vZvKmMNYYYHbI5XL75EYZfxWuc8TWwbCeeqv9w==', 'ADMIN');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('jp', 'jpp@email.com', 'jpadmin', 'AMeHn4LlleJ3bhBYsIegH+ePHp+t7XprZ2pACpKh3XtZqun1vZvKmMNYYYHbI5XL75EYZfxWuc8TWwbCeeqv9w==', 'ADMIN', '90123456789');
 -- senha: jpadmin
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('testeete', 'testtee@email.com', 'teste123', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('testeete', 'testtee@email.com', 'teste123', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '01234567890');
+-- senha: jpuser
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Pedro Almeida', 'pedro@email.com', 'pedro', 'XUv4J7Kz9PwQmRnVpYsWt2x5z8BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '11122233344');
+-- senha: pedro123
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Fernanda Lima', 'fernanda@email.com', 'fernanda', 'YhV5K8L0aQxSnWt3y6z9BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '22233344455');
+-- senha: fernanda456
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Ricardo Oliveira', 'ricardo@email.com', 'ricardo', 'ZiW6L9M1bRyToXu4a7c0DvEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '33344455566');
+-- senha: ricardo789
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Camila Santos', 'camila@email.com', 'camila', 'AjX7M0N2cSzUpYv5b8d1EwFgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '44455566677');
+-- senha: camila101
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Lucas Pereira', 'lucas@email.com', 'lucas', 'BkY8N1O3dTaVqZw6c9e2FxGgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '55566677788');
+-- senha: lucas202
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Juliana Costa', 'juliana@email.com', 'juliana', 'ClZ9O2P4eUbWrAx7d0f3GyHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '66677788899');
+-- senha: juliana303
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Marcos Ribeiro', 'marcos@email.com', 'marcos', 'Dm0P3Q5fVcXsBy8e1g4HzIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '77788899900');
+-- senha: marcos404
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Patricia Alves', 'patricia@email.com', 'patricia', 'En1Q4R6gWdYtCz9f2h5I0JjKlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '88899900011');
+-- senha: patricia505
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Gustavo Ferreira', 'gustavo@email.com', 'gustavo', 'Fo2R5S7hXeZuD0g3i6J1KkLlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '99900011122');
+-- senha: gustavo606
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Isabela Martins', 'isabela@email.com', 'isabela', 'Gp3S6T8iYfAvE1h4j7K2LlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '00011122233');
+-- senha: isabela707
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Roberto Nunes', 'roberto@email.com', 'roberto', 'Hq4T7U9jZgBwF2i5k8L3MmNnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER', '11122233344');
+-- senha: roberto808
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Amanda Dias', 'amanda@email.com', 'amanda', 'Ir5U8V0kAhCxG3j6l9M4NnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER', '22233344455');
+-- senha: amanda909
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Felipe Rocha', 'felipe@email.com', 'felipe', 'Js6V9W1lBiDyH4k7m0N5OoPpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'USER', '33344455566');
+-- senha: felipe010
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Tatiane Gomes', 'tatiane@email.com', 'tatiane', 'Kt7W0X2mCjEzI5l8n1O6PpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'ADMIN', '44455566677');
+-- senha: tatiane111
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Rodrigo Barbosa', 'rodrigo@email.com', 'rodrigo', 'Lu8X1Y3nDkFaJ6m9o2P7QqRrTt4uVvWwXxYyZz0A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6', 'ADMIN', '55566677788');
+-- senha: rodrigo222
+INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
+('Luiz', 'oliveiraluiz@unitins.br', 'luiz', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '66677788899');
 -- senha: jpuser
 
 -- Telefones
@@ -205,68 +253,6 @@ INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCria
 INSERT INTO avaliacao (id_usuario, id_placa_de_video, nota, comentario, dataCriacao) VALUES
 (5, 19, 'CINCO', 'Melhor placa intermediária que já tive', '2025-02-01 18:10:00');
 
-
--- Novos usuários (11 a 25)
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Pedro Almeida', 'pedro@email.com', 'pedro', 'XUv4J7Kz9PwQmRnVpYsWt2x5z8BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: pedro123
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Fernanda Lima', 'fernanda@email.com', 'fernanda', 'YhV5K8L0aQxSnWt3y6z9BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: fernanda456
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Ricardo Oliveira', 'ricardo@email.com', 'ricardo', 'ZiW6L9M1bRyToXu4a7c0DvEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: ricardo789
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Camila Santos', 'camila@email.com', 'camila', 'AjX7M0N2cSzUpYv5b8d1EwFgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: camila101
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Lucas Pereira', 'lucas@email.com', 'lucas', 'BkY8N1O3dTaVqZw6c9e2FxGgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: lucas202
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Juliana Costa', 'juliana@email.com', 'juliana', 'ClZ9O2P4eUbWrAx7d0f3GyHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: juliana303
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Marcos Ribeiro', 'marcos@email.com', 'marcos', 'Dm0P3Q5fVcXsBy8e1g4HzIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER');
--- senha: marcos404
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Patricia Alves', 'patricia@email.com', 'patricia', 'En1Q4R6gWdYtCz9f2h5I0JjKlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
--- senha: patricia505
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Gustavo Ferreira', 'gustavo@email.com', 'gustavo', 'Fo2R5S7hXeZuD0g3i6J1KkLlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
--- senha: gustavo606
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Isabela Martins', 'isabela@email.com', 'isabela', 'Gp3S6T8iYfAvE1h4j7K2LlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER');
--- senha: isabela707
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Roberto Nunes', 'roberto@email.com', 'roberto', 'Hq4T7U9jZgBwF2i5k8L3MmNnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER');
--- senha: roberto808
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Amanda Dias', 'amanda@email.com', 'amanda', 'Ir5U8V0kAhCxG3j6l9M4NnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER');
--- senha: amanda909
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Felipe Rocha', 'felipe@email.com', 'felipe', 'Js6V9W1lBiDyH4k7m0N5OoPpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'USER');
--- senha: felipe010
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Tatiane Gomes', 'tatiane@email.com', 'tatiane', 'Kt7W0X2mCjEzI5l8n1O6PpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'ADMIN');
--- senha: tatiane111
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Rodrigo Barbosa', 'rodrigo@email.com', 'rodrigo', 'Lu8X1Y3nDkFaJ6m9o2P7QqRrTt4uVvWwXxYyZz0A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6', 'ADMIN');
--- senha: rodrigo222
-
 -- Novos telefones (16 a 30)
 INSERT INTO telefone (codigo_area, numero) VALUES ('11', '666666666');
 INSERT INTO telefone (codigo_area, numero) VALUES ('21', '777777777');
@@ -331,7 +317,3 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (16, 12);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (17, 13);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (18, 14);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);
-
-
-INSERT INTO usuario (nome, email, login, senha, perfil) VALUES
-('Luiz', 'oliveiraluiz@unitins.br', 'luiz', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER');

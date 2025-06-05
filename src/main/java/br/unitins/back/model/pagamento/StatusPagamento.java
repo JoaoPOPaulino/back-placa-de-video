@@ -10,8 +10,8 @@ public enum StatusPagamento {
     private final String label;
 
     private StatusPagamento(Integer id, String label) {
-        this.id = null;
-        this.label = null;
+        this.id = id;
+        this.label = label;
     }
 
     public Integer getId() {
@@ -22,13 +22,16 @@ public enum StatusPagamento {
         return label;
     }
 
-    public static StatusPagamento fromString(String status) {
-        for (StatusPagamento tipo : StatusPagamento.values()) {
-            if (tipo.name().equalsIgnoreCase(status)) {
-                return tipo;
+    public static StatusPagamento valueOf(Integer id) throws IllegalArgumentException {
+        if ((id == null)) {
+            return null;
+        }
+        for (StatusPagamento statusPagamento : StatusPagamento.values()) {
+            if (statusPagamento.getId().equals(id)) {
+                return statusPagamento;
             }
         }
-        throw new IllegalArgumentException("Status do Pagamento inválido: " + status);
+        throw new IllegalArgumentException("Id inválido: " + id);
     }
 
 }

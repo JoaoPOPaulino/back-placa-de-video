@@ -13,6 +13,7 @@ public record UsuarioResponseDTO(
         String email,
         String login,
         Perfil perfil,
+        String cpf, // New field for CPF
         List<TelefoneDTO> telefones,
         List<EnderecoDTO> enderecos,
         String nomeImagem) {
@@ -24,6 +25,7 @@ public record UsuarioResponseDTO(
                 usuario.getEmail(),
                 usuario.getLogin(),
                 usuario.getPerfil(),
+                usuario.getCpf(),
                 usuario.getTelefones().stream()
                         .map(t -> TelefoneDTO.valueOf(t)).toList(),
                 usuario.getEnderecos().stream()

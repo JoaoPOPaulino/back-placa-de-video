@@ -10,6 +10,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
 import br.unitins.back.form.ImageForm;
+import br.unitins.back.repository.UsuarioRepository;
 import br.unitins.back.service.usuario.UsuarioFileService;
 import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
@@ -43,6 +44,9 @@ public class UsuarioResource {
 
     @Inject
     UsuarioFileService fileService;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
 
     @POST
     public Response insert(UsuarioDTO dto) {
@@ -89,8 +93,8 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/search/nome/{nome}")
-    public Response findByNome(@PathParam("nome") String nome) {
+    @Path("/search")
+    public Response findByNome(@QueryParam("nome") String nome) {
         LOGGER.info("Buscando usuário pelo nome: " + nome);
         Response response = Response.ok(service.findByNome(nome)).build();
         LOGGER.info("Usuários com nome: " + nome + " recuperados com sucesso");
@@ -105,10 +109,15 @@ public class UsuarioResource {
 
     @GET
     @Path("/exists")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response verificarSeExisteLogin(@QueryParam("login") String login) {
-        boolean existe = service.existsByLogin(login);
-        return Response.ok(existe).build();
+    public Response checkExists(@QueryParam("login") String login, @QueryParam("email") String email, @QueryParam("cpf") String cpf) {
+        if (login != null) {
+            return Response.ok(usuarioRepository.findByLogin(login) != null).build();
+        } else if (email != null) {
+            return Response.ok(usuarioRepository.findByEmail(email) != null).build();
+        } else if (cpf != null) {
+            return Response.ok(usuarioRepository.findByCpf(cpf) != null).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PATCH
