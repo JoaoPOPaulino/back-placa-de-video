@@ -30,6 +30,7 @@
     </dependencyManagement>
 
     <dependencies>
+    
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-multipart</artifactId>
