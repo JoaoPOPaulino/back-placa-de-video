@@ -16,4 +16,28 @@ public class Cupom extends DefaultEntity {
 
     @Enumerated(EnumType.STRING)
     private TipoDesconto tipo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public BigDecimal getValorDesconto() {
+        return valorDesconto;
+    }
+
+    public void setValorDesconto(BigDecimal valorDesconto) {
+        this.valorDesconto = valorDesconto;
+    }
+
+    public TipoDesconto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoDesconto tipo) {
+        this.tipo = tipo;
+    }
 }

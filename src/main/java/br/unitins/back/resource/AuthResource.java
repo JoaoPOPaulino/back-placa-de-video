@@ -16,6 +16,7 @@ import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -54,7 +55,6 @@ public class AuthResource {
         Usuario usuario = usuarioRepository.findByLoginAndSenha(authDTO.login(), hash);
 
         if (usuario == null) {
-            // Verificar se o usuário existe mas a senha está errada
             Usuario usuarioExistente = usuarioRepository.findByLogin(authDTO.login());
             if (usuarioExistente != null) {
                 LOGGER.warn("Usuário {} existe, mas senha está incorreta", authDTO.login());
@@ -79,20 +79,22 @@ public class AuthResource {
     public Response solicitarRecuperacaoSenha(Map<String, String> payload) {
         String loginOuEmail = payload.get("loginOuEmail");
         if (loginOuEmail == null || loginOuEmail.isBlank()) {
-            return Response.status(Status.BAD_REQUEST).entity("Login ou e-mail é obrigatório.").build();
+            return Response.status(Status.BAD_REQUEST).entity(Map.of("message", "Login ou e-mail é obrigatório")).build();
         }
-
         try {
             service.requestPasswordReset(loginOuEmail);
-            return Response.ok("Link de recuperação enviado, se o e-mail/login existir.").build();
+            return Response.ok(Map.of("message", "Link de recuperação enviado, se o e-mail/login existir")).build();
+        } catch (NotFoundException e) {
+            return Response.status(Status.NOT_FOUND).entity(Map.of("message", e.getMessage())).build();
         } catch (Exception e) {
-            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao solicitar recuperação.").build();
+            LOGGER.error("Erro ao processar solicitação: {}", e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Map.of("message", "Erro ao solicitar recuperação")).build();
         }
     }
 
     @POST
     @Path("/resetar-senha")
-    @Transactional // ← ADICIONAR esta anotação
+    @Transactional
     public Response redefinirSenha(Map<String, String> payload) {
         String token = payload.get("token");
         String novaSenha = payload.get("novaSenha");
@@ -108,7 +110,6 @@ public class AuthResource {
                     .entity("Token expirado ou inválido.").build();
         }
 
-        // Buscar usuário de forma correta
         Usuario usuario = usuarioRepository.findByEmail(emailOuLogin);
         if (usuario == null) {
             usuario = usuarioRepository.findByLogin(emailOuLogin);
@@ -120,22 +121,41 @@ public class AuthResource {
                     .entity("Usuário não encontrado").build();
         }
 
-        // Log para debug
         LOGGER.info("Atualizando senha para usuário: {} (ID: {})", usuario.getLogin(), usuario.getId());
 
-        // Definir nova senha
         String novaSenhaHash = hashService.getHashSenha(novaSenha);
         usuario.setSenha(novaSenhaHash);
 
-        // Usar merge ao invés de persist para entidades existentes
         usuarioRepository.getEntityManager().merge(usuario);
 
-        // Ou simplesmente não chame nada, pois a entidade já está managed dentro da transação
-        // Log para confirmar
         LOGGER.info("Senha atualizada com sucesso para usuário ID: {}", usuario.getId());
 
         passwordResetService.invalidateToken(token);
 
         return Response.ok(Map.of("message", "Senha redefinida com sucesso!")).build();
+    }
+
+    @POST
+    @Path("/validar-senha")
+    public Response validarSenha(Map<String, Object> payload) {
+        Long usuarioId = Long.parseLong(payload.get("usuarioId").toString());
+        String senha = payload.get("senha").toString();
+
+        if (usuarioId == null || senha == null || senha.isBlank()) {
+            return Response.status(Status.BAD_REQUEST)
+                    .entity(Map.of("message", "ID do usuário e senha são obrigatórios"))
+                    .build();
+        }
+
+        Usuario usuario = usuarioRepository.findById(usuarioId);
+        if (usuario == null) {
+            return Response.status(Status.NOT_FOUND)
+                    .entity(Map.of("message", "Usuário não encontrado"))
+                    .build();
+        }
+
+        boolean senhaValida = hashService.getHashSenha(senha).equals(usuario.getSenha());
+
+        return Response.ok(Map.of("valido", senhaValida)).build();
     }
 }

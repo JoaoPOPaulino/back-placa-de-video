@@ -49,4 +49,9 @@ public interface UsuarioService {
     UsuarioResponseDTO addEndereco(Long id, EnderecoDTO enderecoDTO);
 
     UsuarioResponseDTO removeEndereco(Long id, Long enderecoId);
+
+    void changePassword(Long id, String currentPassword, String newPassword);
+
+    boolean validarSenha(Long id, String senha);
+
 }

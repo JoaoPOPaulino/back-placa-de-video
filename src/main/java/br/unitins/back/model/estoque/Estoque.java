@@ -16,4 +16,28 @@ public class Estoque extends DefaultEntity {
     private int quantidade;
 
     private LocalDateTime dataMovimentacao;
+
+    public TipoMovimentacao getTipoMovimentacao() {
+        return tipoMovimentacao;
+    }
+
+    public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
+        this.tipoMovimentacao = tipoMovimentacao;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public LocalDateTime getDataMovimentacao() {
+        return dataMovimentacao;
+    }
+
+    public void setDataMovimentacao(LocalDateTime dataMovimentacao) {
+        this.dataMovimentacao = dataMovimentacao;
+    }
 }

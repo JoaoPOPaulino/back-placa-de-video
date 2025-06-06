@@ -3,6 +3,7 @@ package br.unitins.back.resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
@@ -74,11 +75,11 @@ public class UsuarioResource {
         } catch (ConstraintViolationException e) {
             LOGGER.error("Erro de validação: " + e.getMessage(), e);
             List<String> violations = e.getConstraintViolations().stream()
-                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
-                .collect(Collectors.toList());
+                    .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                    .collect(Collectors.toList());
             return Response.status(Status.BAD_REQUEST)
-                .entity(violations)
-                .build();
+                    .entity(violations)
+                    .build();
         } catch (IllegalArgumentException e) {
             LOGGER.error("Erro ao atualizar usuário: " + e.getMessage(), e);
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -88,8 +89,8 @@ public class UsuarioResource {
         } catch (Exception e) {
             LOGGER.error("Erro interno ao atualizar usuário: " + e.getMessage(), e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                .entity("Erro interno no servidor: " + e.getMessage())
-                .build();
+                    .entity("Erro interno no servidor: " + e.getMessage())
+                    .build();
         }
     }
 
@@ -98,9 +99,19 @@ public class UsuarioResource {
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         LOGGER.info("Iniciando remoção do usuário com ID: " + id);
-        service.delete(id);
-        LOGGER.info("Usuário com ID: " + id + " removido com sucesso");
-        return Response.noContent().build();
+        try {
+            service.delete(id);
+            LOGGER.info("Usuário com ID: " + id + " removido com sucesso");
+            return Response.noContent().build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário não encontrado: " + e.getMessage());
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao deletar usuário: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao deletar usuário: " + e.getMessage())
+                    .build();
+        }
     }
 
     @GET
@@ -201,14 +212,14 @@ public class UsuarioResource {
         } catch (ConstraintViolationException e) {
             LOGGER.error("Erro de validação: " + e.getMessage(), e);
             List<String> violations = e.getConstraintViolations().stream()
-                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
-                .collect(Collectors.toList());
+                    .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                    .collect(Collectors.toList());
             return Response.status(Status.BAD_REQUEST).entity(violations).build();
         } catch (Exception e) {
             LOGGER.error("Erro ao adicionar telefone: " + e.getMessage(), e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                .entity("Erro interno no servidor: " + e.getMessage())
-                .build();
+                    .entity("Erro interno no servidor: " + e.getMessage())
+                    .build();
         }
     }
 
@@ -227,8 +238,8 @@ public class UsuarioResource {
         } catch (Exception e) {
             LOGGER.error("Erro ao remover telefone: " + e.getMessage(), e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                .entity("Erro interno no servidor: " + e.getMessage())
-                .build();
+                    .entity("Erro interno no servidor: " + e.getMessage())
+                    .build();
         }
     }
 
@@ -247,14 +258,14 @@ public class UsuarioResource {
         } catch (ConstraintViolationException e) {
             LOGGER.error("Erro de validação: " + e.getMessage(), e);
             List<String> violations = e.getConstraintViolations().stream()
-                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
-                .collect(Collectors.toList());
+                    .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                    .collect(Collectors.toList());
             return Response.status(Status.BAD_REQUEST).entity(violations).build();
         } catch (Exception e) {
             LOGGER.error("Erro ao adicionar endereço: " + e.getMessage(), e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                .entity("Erro interno no servidor: " + e.getMessage())
-                .build();
+                    .entity("Erro interno no servidor: " + e.getMessage())
+                    .build();
         }
     }
 
@@ -273,8 +284,48 @@ public class UsuarioResource {
         } catch (Exception e) {
             LOGGER.error("Erro ao remover endereço: " + e.getMessage(), e);
             return Response.status(Status.INTERNAL_SERVER_ERROR)
-                .entity("Erro interno no servidor: " + e.getMessage())
-                .build();
+                    .entity("Erro interno no servidor: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @POST
+    @Transactional
+    @Path("/{id}/change-password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changePassword(@PathParam("id") Long id, Map<String, String> payload) {
+        LOGGER.infof("Alterando senha para usuário ID: %d", id);
+        String currentPassword = payload.get("currentPassword");
+        String newPassword = payload.get("newPassword");
+        if (currentPassword == null || newPassword == null) {
+            return Response.status(Status.BAD_REQUEST).entity("Senha atual e nova são obrigatórias").build();
+        }
+        try {
+            service.changePassword(id, currentPassword, newPassword);
+            return Response.ok().build();
+        } catch (NotFoundException e) {
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao alterar senha: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno no servidor").build();
+        }
+    }
+
+    @POST
+    @Path("/validar-senha")
+    public Response validarSenha(Map<String, Object> payload) {
+        try {
+            Long id = Long.parseLong(payload.get("id").toString());
+            String senha = payload.get("senha").toString();
+
+            boolean valido = service.validarSenha(id, senha);
+            return Response.ok(Map.of("valido", valido)).build();
+        } catch (NotFoundException e) {
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            return Response.status(Status.BAD_REQUEST).entity("Requisição inválida").build();
         }
     }
 }

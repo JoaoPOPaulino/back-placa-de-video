@@ -64,60 +64,97 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuario == null) {
             throw new NotFoundException("Usuário não encontrado");
         }
+
+        // Verifica se o email foi alterado e se já existe
         if (!usuario.getEmail().equals(dto.email()) && repository.existsByEmail(dto.email())) {
             throw new IllegalArgumentException("E-mail já está em uso");
         }
+
+        // Verifica se o CPF foi alterado e se já existe
         if (!usuario.getCpf().equals(dto.cpf()) && repository.find("cpf", dto.cpf()).count() > 0) {
             throw new IllegalArgumentException("CPF já está em uso");
         }
-        mapDtoToEntity(dto, usuario);
+
+        // Atualiza apenas os campos básicos
+        usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setLogin(dto.login());
+        usuario.setCpf(dto.cpf());
+
+        switch (dto.perfil()) {
+            case 1:
+                usuario.setPerfil(Perfil.USER);
+                break;
+            case 2:
+                usuario.setPerfil(Perfil.ADMIN);
+                break;
+            default:
+                throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
+        }
+
+        // Atualiza imagem se fornecida
+        if (dto.nomeImagem() != null) {
+            usuario.setNomeImagem(dto.nomeImagem());
+        }
+
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
-   private void mapDtoToEntity(UsuarioDTO dto, Usuario usuario) {
-    LOGGER.info("Mapeando DTO para entidade. DTO: " + dto);
-    usuario.setNome(dto.nome());
-    usuario.setEmail(dto.email());
-    usuario.setLogin(dto.login());
-    if (dto.senha() != null && !dto.senha().isBlank()) {
-        usuario.setSenha(hashService.getHashSenha(dto.senha()));
-    }
-    usuario.setCpf(dto.cpf());
-
-    switch (dto.perfil()) {
-        case 1:
-            usuario.setPerfil(Perfil.USER);
-            break;
-        case 2:
-            usuario.setPerfil(Perfil.ADMIN);
-            break;
-        default:
-            throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
-    }
-
-    usuario.setTelefones(new ArrayList<>());
-    usuario.setEnderecos(new ArrayList<>());
-    if (dto.telefones() != null && !dto.telefones().isEmpty()) {
-        LOGGER.debug("Telefones recebidos: " + dto.telefones());
-        for (TelefoneDTO telDto : dto.telefones()) {
-            Telefone telefone = new Telefone(telDto);
-            usuario.getTelefones().add(telefone);
+    private void mapDtoToEntity(UsuarioDTO dto, Usuario usuario) {
+        LOGGER.info("Mapeando DTO para entidade. DTO: " + dto);
+        usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setLogin(dto.login());
+        if (dto.senha() != null && !dto.senha().isBlank()) {
+            usuario.setSenha(hashService.getHashSenha(dto.senha()));
         }
-    }
-    if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-        LOGGER.debug("Endereços recebidos: " + dto.enderecos());
-        for (EnderecoDTO endDto : dto.enderecos()) {
-            Endereco endereco = new Endereco(endDto);
-            usuario.getEnderecos().add(endereco);
+        usuario.setCpf(dto.cpf());
+
+        switch (dto.perfil()) {
+            case 1:
+                usuario.setPerfil(Perfil.USER);
+                break;
+            case 2:
+                usuario.setPerfil(Perfil.ADMIN);
+                break;
+            default:
+                throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
         }
+
+        usuario.setTelefones(new ArrayList<>());
+        usuario.setEnderecos(new ArrayList<>());
+        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+            LOGGER.debug("Telefones recebidos: " + dto.telefones());
+            for (TelefoneDTO telDto : dto.telefones()) {
+                Telefone telefone = new Telefone(telDto);
+                usuario.getTelefones().add(telefone);
+            }
+        }
+        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+            LOGGER.debug("Endereços recebidos: " + dto.enderecos());
+            for (EnderecoDTO endDto : dto.enderecos()) {
+                Endereco endereco = new Endereco(endDto);
+                usuario.getEnderecos().add(endereco);
+            }
+        }
+        usuario.setNomeImagem(dto.nomeImagem());
     }
-    usuario.setNomeImagem(dto.nomeImagem());
-    }
+
     @Override
     @Transactional
     public void delete(Long id) {
-        if (!repository.deleteById(id)) {
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
             throw new NotFoundException("Usuário não encontrado.");
+        }
+
+        usuario.getTelefones().clear();
+        usuario.getEnderecos().clear();
+
+        repository.persist(usuario);
+
+        if (!repository.deleteById(id)) {
+            throw new NotFoundException("Falha ao deletar usuário.");
         }
     }
 
@@ -300,5 +337,30 @@ public class UsuarioServiceImpl implements UsuarioService {
         LOGGER.infof("Endereço ID: %d removido com sucesso", enderecoId);
         return UsuarioResponseDTO.valueOf(usuario);
     }
-}
 
+    @Override
+    @Transactional
+    public void changePassword(Long id, String currentPassword, String newPassword) {
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        if (!hashService.getHashSenha(currentPassword).equals(usuario.getSenha())) {
+            throw new IllegalArgumentException("Senha atual incorreta");
+        }
+        if (newPassword.length() < 6) {
+            throw new IllegalArgumentException("Nova senha deve ter pelo menos 6 caracteres");
+        }
+        usuario.setSenha(hashService.getHashSenha(newPassword));
+        repository.persist(usuario);
+    }
+
+    @Override
+    public boolean validarSenha(Long id, String senha) {
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        return hashService.getHashSenha(senha).equals(usuario.getSenha());
+    }
+}

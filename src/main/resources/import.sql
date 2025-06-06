@@ -80,7 +80,7 @@ INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('Sem Telefone', 'semtel@email.com', 'semtel', 'H7rfcAXwQxE81ZnB/uXhEsJMEceqnOqy32gmn86SkaQ3iFbv4zHEt/kD4iwa+C8dVp99fGX2lPqFWRtSG5hzDw==', 'USER', '78901234567');
 -- senha 666
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('jp', 'joaopedrojpjp4@gmail.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '06263209178');
+('João Pedro', 'joaopedrojpjp4@gmail.com', 'jpuser', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '06263209178');
 -- senha: jpuser
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('jp', 'jpp@email.com', 'jpadmin', 'AMeHn4LlleJ3bhBYsIegH+ePHp+t7XprZ2pACpKh3XtZqun1vZvKmMNYYYHbI5XL75EYZfxWuc8TWwbCeeqv9w==', 'ADMIN', '90123456789');
@@ -317,3 +317,7 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (16, 12);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (17, 13);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (18, 14);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);
+
+-- pedidos
+INSERT INTO pedido (id_usuario, status, valorTotal, id_pagamento, dataPedido)
+VALUES (8, 'AGUARDANDO_PAGAMENTO', 4999.98, 1, NOW());

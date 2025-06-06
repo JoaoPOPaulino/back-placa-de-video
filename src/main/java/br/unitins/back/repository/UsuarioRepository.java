@@ -55,4 +55,7 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("ORDER BY nome ASC");
     }
 
+    public Usuario findByResetToken(String token) {
+    return find("resetToken", token).firstResult();
+}
 }
