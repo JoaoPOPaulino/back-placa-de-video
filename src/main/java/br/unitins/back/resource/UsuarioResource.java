@@ -3,10 +3,13 @@ package br.unitins.back.resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.unitins.back.dto.request.usuario.EnderecoDTO;
+import br.unitins.back.dto.request.usuario.TelefoneDTO;
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
 import br.unitins.back.form.ImageForm;
@@ -15,11 +18,13 @@ import br.unitins.back.service.usuario.UsuarioFileService;
 import br.unitins.back.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -61,9 +66,31 @@ public class UsuarioResource {
     @Path("/{id}")
     public Response update(@Valid UsuarioDTO dto, @PathParam("id") Long id) {
         LOGGER.info("Iniciando atualização do usuário com ID: " + id);
-        service.update(dto, id);
-        LOGGER.info("Usuário com ID: " + id + " atualizado com sucesso");
-        return Response.noContent().build();
+        LOGGER.debug("Payload recebido: " + dto);
+        try {
+            UsuarioResponseDTO response = service.update(dto, id);
+            LOGGER.info("Usuário com ID: " + id + " atualizado com sucesso");
+            return Response.ok(response).build();
+        } catch (ConstraintViolationException e) {
+            LOGGER.error("Erro de validação: " + e.getMessage(), e);
+            List<String> violations = e.getConstraintViolations().stream()
+                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                .collect(Collectors.toList());
+            return Response.status(Status.BAD_REQUEST)
+                .entity(violations)
+                .build();
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("Erro ao atualizar usuário: " + e.getMessage(), e);
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário não encontrado: " + e.getMessage(), e);
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro interno ao atualizar usuário: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                .entity("Erro interno no servidor: " + e.getMessage())
+                .build();
+        }
     }
 
     @DELETE
@@ -157,5 +184,97 @@ public class UsuarioResource {
         LOGGER.info("Download da imagem: " + nomeImagem + " realizado com sucesso");
         return response.build();
 
+    }
+
+    @POST
+    @Transactional
+    @Path("/{id}/telefones")
+    public Response addTelefone(@PathParam("id") Long id, @Valid TelefoneDTO telefoneDTO) {
+        LOGGER.infof("Adicionando telefone para usuário ID: %d", id);
+        try {
+            UsuarioResponseDTO response = service.addTelefone(id, telefoneDTO);
+            LOGGER.infof("Telefone adicionado com sucesso para usuário ID: %d", id);
+            return Response.ok(response).build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário não encontrado: " + e.getMessage(), e);
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (ConstraintViolationException e) {
+            LOGGER.error("Erro de validação: " + e.getMessage(), e);
+            List<String> violations = e.getConstraintViolations().stream()
+                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                .collect(Collectors.toList());
+            return Response.status(Status.BAD_REQUEST).entity(violations).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao adicionar telefone: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                .entity("Erro interno no servidor: " + e.getMessage())
+                .build();
+        }
+    }
+
+    @DELETE
+    @Transactional
+    @Path("/{id}/telefones/{telefoneId}")
+    public Response removeTelefone(@PathParam("id") Long id, @PathParam("telefoneId") Long telefoneId) {
+        LOGGER.infof("Removendo telefone ID: %d do usuário ID: %d", telefoneId, id);
+        try {
+            UsuarioResponseDTO response = service.removeTelefone(id, telefoneId);
+            LOGGER.infof("Telefone ID: %d removido com sucesso", telefoneId);
+            return Response.ok(response).build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário ou telefone não encontrado: " + e.getMessage(), e);
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao remover telefone: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                .entity("Erro interno no servidor: " + e.getMessage())
+                .build();
+        }
+    }
+
+    @POST
+    @Transactional
+    @Path("/{id}/enderecos")
+    public Response addEndereco(@PathParam("id") Long id, @Valid EnderecoDTO enderecoDTO) {
+        LOGGER.infof("Adicionando endereço para usuário ID: %d", id);
+        try {
+            UsuarioResponseDTO response = service.addEndereco(id, enderecoDTO);
+            LOGGER.infof("Endereço adicionado com sucesso para usuário ID: %d", id);
+            return Response.ok(response).build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário não encontrado: " + e.getMessage(), e);
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (ConstraintViolationException e) {
+            LOGGER.error("Erro de validação: " + e.getMessage(), e);
+            List<String> violations = e.getConstraintViolations().stream()
+                .map(cv -> cv.getPropertyPath() + ": " + cv.getMessage())
+                .collect(Collectors.toList());
+            return Response.status(Status.BAD_REQUEST).entity(violations).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao adicionar endereço: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                .entity("Erro interno no servidor: " + e.getMessage())
+                .build();
+        }
+    }
+
+    @DELETE
+    @Transactional
+    @Path("/{id}/enderecos/{enderecoId}")
+    public Response removeEndereco(@PathParam("id") Long id, @PathParam("enderecoId") Long enderecoId) {
+        LOGGER.infof("Removendo endereço ID: %d do usuário ID: %d", enderecoId, id);
+        try {
+            UsuarioResponseDTO response = service.removeEndereco(id, enderecoId);
+            LOGGER.infof("Endereço ID: %d removido com sucesso", enderecoId);
+            return Response.ok(response).build();
+        } catch (NotFoundException e) {
+            LOGGER.error("Usuário ou endereço não encontrado: " + e.getMessage(), e);
+            return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            LOGGER.error("Erro ao remover endereço: " + e.getMessage(), e);
+            return Response.status(Status.INTERNAL_SERVER_ERROR)
+                .entity("Erro interno no servidor: " + e.getMessage())
+                .build();
+        }
     }
 }

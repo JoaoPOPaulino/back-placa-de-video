@@ -74,25 +74,41 @@ public class Usuario extends DefaultEntity {
     }
 
     public void atualizarComDTO(UsuarioDTO dto, HashService hashService) {
-        this.nome = dto.nome();
-        this.email = dto.email();
-        this.login = dto.login();
-        if (dto.senha() != null && !dto.senha().isEmpty()) {
-            this.senha = hashService.getHashSenha(dto.senha());
-        }
-        this.perfil = Perfil.valueOf(dto.perfil());
-        this.cpf = dto.cpf(); // Adiciona CPF
-        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
-            this.telefones = dto.telefones().stream()
-                    .map(Telefone::new)
-                    .collect(Collectors.toList());
-        }
-        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-            this.enderecos = dto.enderecos().stream()
-                    .map(Endereco::new)
-                    .collect(Collectors.toList());
-        }
+    this.nome = dto.nome();
+    this.email = dto.email();
+    this.login = dto.login();
+    if (dto.senha() != null && !dto.senha().isEmpty()) {
+        this.senha = hashService.getHashSenha(dto.senha());
     }
+    this.cpf = dto.cpf();
+
+    switch (dto.perfil()) {
+        case 1:
+            this.perfil = Perfil.USER;
+            break;
+        case 2:
+            this.perfil = Perfil.ADMIN;
+            break;
+        default:
+            throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
+    }
+
+    this.telefones = new ArrayList<>();
+    if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+        this.telefones = dto.telefones().stream()
+            .map(Telefone::new)
+            .collect(Collectors.toList());
+    }
+
+    this.enderecos = new ArrayList<>();
+    if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+        this.enderecos = dto.enderecos().stream()
+                .map(Endereco::new)
+                .collect(Collectors.toList());
+    }
+
+    this.nomeImagem = dto.nomeImagem();
+}
 
     // Getters e Setters
     public String getNome() {

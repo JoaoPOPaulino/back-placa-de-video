@@ -2,12 +2,15 @@ package br.unitins.back.model.usuario;
 
 import br.unitins.back.dto.request.usuario.TelefoneDTO;
 import br.unitins.back.model.DefaultEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Telefone extends DefaultEntity {
 
+    @Column(name = "codigo_area")
     private String codigoArea;
+    @Column(name = "numero")
     private String numero;
 
     public Telefone() {

@@ -122,7 +122,7 @@ INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('Roberto Nunes', 'roberto@email.com', 'roberto', 'Hq4T7U9jZgBwF2i5k8L3MmNnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER', '11122233344');
 -- senha: roberto808
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Amanda Dias', 'amanda@email.com', 'amanda', 'Ir5U8V0kAhCxG3j6l9M4NnOoPpRr2sTuVvWwXxYyZ4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0', 'USER', '22233344455');
+('Amanda Dias', 'amanda@email.com', 'amanda', 'UZAufoGhEJ7p+D8QKwm7fZHwBcq0m7Mq4KAh7fcKynJdpxuJI/uCnHEei0bF1igEcogtrax+F/P2j8RbwteXWg==', 'USER', '22233344455');
 -- senha: amanda909
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('Felipe Rocha', 'felipe@email.com', 'felipe', 'Js6V9W1lBiDyH4k7m0N5OoPpQqSs3tUvVwWxXyYzZ5A6B7C8D9E0F1G2H3I4J5K6L7M8N9O0P1Q2R3S4T5U6V7W8X9Y0Z1', 'USER', '33344455566');

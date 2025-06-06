@@ -13,7 +13,7 @@ public record UsuarioResponseDTO(
         String email,
         String login,
         Perfil perfil,
-        String cpf, // New field for CPF
+        String cpf,
         List<TelefoneDTO> telefones,
         List<EnderecoDTO> enderecos,
         String nomeImagem) {

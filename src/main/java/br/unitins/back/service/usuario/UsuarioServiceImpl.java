@@ -74,42 +74,45 @@ public class UsuarioServiceImpl implements UsuarioService {
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
-    private void mapDtoToEntity(UsuarioDTO dto, Usuario usuario) {
-        usuario.setNome(dto.nome());
-        usuario.setEmail(dto.email());
-        usuario.setLogin(dto.login());
+   private void mapDtoToEntity(UsuarioDTO dto, Usuario usuario) {
+    LOGGER.info("Mapeando DTO para entidade. DTO: " + dto);
+    usuario.setNome(dto.nome());
+    usuario.setEmail(dto.email());
+    usuario.setLogin(dto.login());
+    if (dto.senha() != null && !dto.senha().isBlank()) {
         usuario.setSenha(hashService.getHashSenha(dto.senha()));
-        usuario.setCpf(dto.cpf());
+    }
+    usuario.setCpf(dto.cpf());
 
-        switch (dto.perfil()) {
-            case 1:
-                usuario.setPerfil(Perfil.USER);
-                break;
-            case 2:
-                usuario.setPerfil(Perfil.ADMIN);
-                break;
-            default:
-                throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
-        }
-
-        usuario.setTelefones(new ArrayList<>());
-        usuario.setEnderecos(new ArrayList<>());
-        if (dto.telefones() != null && !dto.telefones().isEmpty()) {
-            for (TelefoneDTO telDto : dto.telefones()) {
-                Telefone telefone = new Telefone(telDto);
-                usuario.getTelefones().add(telefone);
-            }
-        }
-        if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
-            for (EnderecoDTO endDto : dto.enderecos()) {
-                Endereco endereco = new Endereco(endDto);
-                usuario.getEnderecos().add(endereco);
-            }
-        }
-        usuario.setNomeImagem(dto.nomeImagem());
+    switch (dto.perfil()) {
+        case 1:
+            usuario.setPerfil(Perfil.USER);
+            break;
+        case 2:
+            usuario.setPerfil(Perfil.ADMIN);
+            break;
+        default:
+            throw new IllegalArgumentException("Perfil inválido: " + dto.perfil());
     }
 
-    // Outros métodos permanecem inalterados
+    usuario.setTelefones(new ArrayList<>());
+    usuario.setEnderecos(new ArrayList<>());
+    if (dto.telefones() != null && !dto.telefones().isEmpty()) {
+        LOGGER.debug("Telefones recebidos: " + dto.telefones());
+        for (TelefoneDTO telDto : dto.telefones()) {
+            Telefone telefone = new Telefone(telDto);
+            usuario.getTelefones().add(telefone);
+        }
+    }
+    if (dto.enderecos() != null && !dto.enderecos().isEmpty()) {
+        LOGGER.debug("Endereços recebidos: " + dto.enderecos());
+        for (EnderecoDTO endDto : dto.enderecos()) {
+            Endereco endereco = new Endereco(endDto);
+            usuario.getEnderecos().add(endereco);
+        }
+    }
+    usuario.setNomeImagem(dto.nomeImagem());
+    }
     @Override
     @Transactional
     public void delete(Long id) {
@@ -233,4 +236,69 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return UsuarioResponseDTO.valueOf(usuario);
     }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO addTelefone(Long id, TelefoneDTO telefoneDTO) {
+        LOGGER.infof("Adicionando telefone para usuário ID: %d, Telefone: %s", id, telefoneDTO);
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        Telefone telefone = new Telefone(telefoneDTO);
+        usuario.getTelefones().add(telefone);
+        repository.persist(usuario);
+        LOGGER.infof("Telefone adicionado com sucesso para usuário ID: %d", id);
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO removeTelefone(Long id, Long telefoneId) {
+        LOGGER.infof("Removendo telefone ID: %d do usuário ID: %d", telefoneId, id);
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        boolean removed = usuario.getTelefones().removeIf(t -> t.getId().equals(telefoneId));
+        if (!removed) {
+            throw new NotFoundException("Telefone não encontrado");
+        }
+        repository.persist(usuario);
+        LOGGER.infof("Telefone ID: %d removido com sucesso", telefoneId);
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO addEndereco(Long id, EnderecoDTO enderecoDTO) {
+        LOGGER.infof("Adicionando endereço para usuário ID: %d, Endereço: %s", id, enderecoDTO);
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        Endereco endereco = new Endereco(enderecoDTO);
+        usuario.getEnderecos().add(endereco);
+        repository.persist(usuario);
+        LOGGER.infof("Endereço adicionado com sucesso para usuário ID: %d", id);
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO removeEndereco(Long id, Long enderecoId) {
+        LOGGER.infof("Removendo endereço ID: %d do usuário ID: %d", enderecoId, id);
+        Usuario usuario = repository.findById(id);
+        if (usuario == null) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
+        boolean removed = usuario.getEnderecos().removeIf(e -> e.getId().equals(enderecoId));
+        if (!removed) {
+            throw new NotFoundException("Endereço não encontrado");
+        }
+        repository.persist(usuario);
+        LOGGER.infof("Endereço ID: %d removido com sucesso", enderecoId);
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
 }
+

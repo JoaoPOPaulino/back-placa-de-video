@@ -2,6 +2,8 @@ package br.unitins.back.service.usuario;
 
 import java.util.List;
 
+import br.unitins.back.dto.request.usuario.EnderecoDTO;
+import br.unitins.back.dto.request.usuario.TelefoneDTO;
 import br.unitins.back.dto.request.usuario.UsuarioDTO;
 import br.unitins.back.dto.response.UsuarioResponseDTO;
 import jakarta.validation.Valid;
@@ -39,4 +41,12 @@ public interface UsuarioService {
     UsuarioResponseDTO updateNomeImagem(Long id, String nomeImagem);
 
     void updateSenha(Long id, String senha);
+
+    UsuarioResponseDTO addTelefone(Long id, TelefoneDTO telefoneDTO);
+
+    UsuarioResponseDTO removeTelefone(Long id, Long telefoneId);
+
+    UsuarioResponseDTO addEndereco(Long id, EnderecoDTO enderecoDTO);
+
+    UsuarioResponseDTO removeEndereco(Long id, Long enderecoId);
 }
