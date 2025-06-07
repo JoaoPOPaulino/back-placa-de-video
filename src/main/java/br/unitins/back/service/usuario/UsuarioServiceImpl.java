@@ -363,4 +363,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return hashService.getHashSenha(senha).equals(usuario.getSenha());
     }
+
 }

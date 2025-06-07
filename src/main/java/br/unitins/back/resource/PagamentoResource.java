@@ -1,7 +1,6 @@
 package br.unitins.back.resource;
 
-import br.unitins.back.dto.request.pagamento.PagamentoComChavePixDTO;
-import br.unitins.back.dto.request.pagamento.PagamentoDTO;
+import br.unitins.back.dto.request.pagamento.GooglePayTokenDTO;
 import br.unitins.back.dto.response.PagamentoResponseDTO;
 import br.unitins.back.service.pagamento.PagamentoService;
 import jakarta.inject.Inject;
@@ -23,28 +22,6 @@ public class PagamentoResource {
     @Inject
     private PagamentoService pagamentoService;
 
-    @POST
-    @Path("/processar/{idPedido}")
-    public Response processarPagamento(@PathParam("idPedido") Long idPedido, @Valid PagamentoDTO dto) {
-        try {
-            PagamentoResponseDTO response = pagamentoService.processarPagamento(dto, idPedido);
-            return Response.ok(response).build();
-        } catch (RuntimeException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
-
-    @POST
-    @Path("/salvar/{idPedido}")
-    public Response salvarPagamentoComChavePix(@PathParam("idPedido") Long idPedido, @Valid PagamentoComChavePixDTO dto) {
-        try {
-            PagamentoResponseDTO response = pagamentoService.salvarPagamentoComChavePix(idPedido, dto.payment(), dto.chavePix());
-            return Response.ok(response).build();
-        } catch (RuntimeException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
-
     @GET
     @Path("/pedido/{id}")
     public Response findById(@PathParam("id") Long id) {
@@ -55,4 +32,16 @@ public class PagamentoResource {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
+
+    @POST
+    @Path("/googlepay/{idPedido}")
+    public Response processarGooglePay(@PathParam("idPedido") Long idPedido, @Valid GooglePayTokenDTO dto) {
+        try {
+            PagamentoResponseDTO response = pagamentoService.processarPagamentoGooglePay(dto, idPedido);
+            return Response.ok(response).build();
+        } catch (RuntimeException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
 }
