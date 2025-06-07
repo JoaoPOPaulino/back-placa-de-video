@@ -38,24 +38,24 @@ INSERT INTO especificacaoTecnica (memoria, clock, barramento, consumoEnergia) VA
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 3060', 2499.99, 1, 1, 'INTERMEDIARIA', 15, 'rtx3060.jpg', 'Placa de vídeo intermediária com excelente desempenho para jogos em 1080p e 1440p.');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 6700 XT', 2899.90, 2, 2, 'INTERMEDIARIA', 8, 'rx6700xt.jpg', 'Ideal para jogos em 1440p com ray tracing e ótimo custo-benefício.');
 INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 4090', 14999.90, 3, 1, 'ALTO_DESEMPENHO', 3, 'rtx4090.jpg', 'Placa topo de linha para jogos em 4K e tarefas de renderização intensivas.');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A770', 2199.00, 4, 3, 'ENTRADA', 12, 'arcA770.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 4070 Ti', 5999.99, 5, 1, 'ALTO_DESEMPENHO', 5, 'rtx4070ti.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7900 XTX', 7999.90, 6, 2, 'ALTO_DESEMPENHO', 4, 'rx7900xtx.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('GTX 1660 Super', 1299.90, 7, 1, 'ENTRADA', 10, 'gtx1660Super.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('GT 1030', 499.90, 8, 1, 'ENTRADA', 25, 'gt1030.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 550', 599.90, 9, 2, 'ENTRADA', 20, 'rx550.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 3080 Ti', 8999.99, 10, 1, 'ALTO_DESEMPENHO', 6, 'rtx3080ti.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 6800 XT', 6899.90, 11, 2, 'ALTO_DESEMPENHO', 5, 'rx6800xt.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('GT 710', 399.90, 12, 1, 'ENTRADA', 30, 'gt710.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('GTX 1070', 1099.90, 13, 4, 'INTERMEDIARIA', 7, 'gtx1070.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 580', 999.90, 14, 2, 'INTERMEDIARIA', 9, 'rx580.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 3080', 7299.90, 15, 1, 'ALTO_DESEMPENHO', 4, 'rtx3080.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 5000 ADA', 18999.90, 16, 1, 'ALTO_DESEMPENHO', 2, 'rtx5000ada.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7600', 2299.90, 17, 2, 'INTERMEDIARIA', 10, 'rx7600.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15, 'ARCa580.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RTX 4060 Ti', 3499.90, 19, 1, 'INTERMEDIARIA', 10, 'rtx4060ti.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('RX 7900 GRE', 5999.90, 20, 2, 'ALTO_DESEMPENHO', 6, 'rx7900gre.jpg');
-INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.jpg');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('Arc A770', 2199.00, 4, 3, 'ENTRADA', 12, 'arcA770.jpg', 'Placa de entrada Intel, ideal para jogos leves e aplicações multimídia.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 4070 Ti', 5999.99, 5, 1, 'ALTO_DESEMPENHO', 5, 'rtx4070ti.jpg', 'Placa NVIDIA de alto desempenho, otimizada para jogos em 4K e tarefas exigentes.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 7900 XTX', 7999.90, 6, 2, 'ALTO_DESEMPENHO', 4, 'rx7900xtx.jpg', 'Placa AMD premium, perfeita para jogos em 4K e ray tracing avançado.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('GTX 1660 Super', 1299.90, 7, 1, 'ENTRADA', 10, 'gtx1660Super.jpg', 'Placa de entrada NVIDIA, excelente para jogos em 1080p com bom custo-benefício.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('GT 1030', 499.90, 8, 1, 'ENTRADA', 25, 'gt1030.jpg', 'Placa básica para desktops multimídia e jogos muito leves.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 550', 599.90, 9, 2, 'ENTRADA', 20, 'rx550.jpg', 'Placa AMD acessível, ideal para jogos casuais e uso básico.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 3080 Ti', 8999.99, 10, 1, 'ALTO_DESEMPENHO', 6, 'rtx3080ti.jpg', 'Placa NVIDIA de alto desempenho, ideal para jogos em 4K e renderização profissional.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 6800 XT', 6899.90, 11, 2, 'ALTO_DESEMPENHO', 5, 'rx6800xt.jpg', 'Placa AMD poderosa, otimizada para jogos em 1440p e 4K com ray tracing.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('GT 710', 399.90, 12, 1, 'ENTRADA', 30, 'gt710.jpg', 'Placa ultracompacta para sistemas HTPC e tarefas multimídia básicas.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('GTX 1070', 1099.90, 13, 4, 'INTERMEDIARIA', 7, 'gtx1070.jpg', 'Placa ASUS clássica, ainda eficiente para jogos em 1080p e 1440p.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 580', 999.90, 14, 2, 'INTERMEDIARIA', 9, 'rx580.jpg', 'Placa AMD acessível, ideal para jogos em 1080p com bom desempenho.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 3080', 7299.90, 15, 1, 'ALTO_DESEMPENHO', 4, 'rtx3080.jpg', 'Placa NVIDIA robusta, perfeita para jogos em 4K e tarefas computacionais.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 5000 ADA', 18999.90, 16, 1, 'ALTO_DESEMPENHO', 2, 'rtx5000ada.jpg', 'Placa profissional NVIDIA, ideal para renderização, IA e tarefas intensivas.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 7600', 2299.90, 17, 2, 'INTERMEDIARIA', 10, 'rx7600.jpg', 'Placa AMD intermediária, otimizada para jogos em 1080p e 1440p eficientes.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('Arc A580', 1399.00, 18, 3, 'ENTRADA', 15, 'ARCa580.jpg', 'Placa Intel de entrada, boa para jogos leves e aplicações multimídia.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RTX 4060 Ti', 3499.90, 19, 1, 'INTERMEDIARIA', 10, 'rtx4060ti.jpg', 'Placa NVIDIA intermediária, excelente para jogos em 1440p com ray tracing.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('RX 7900 GRE', 5999.90, 20, 2, 'ALTO_DESEMPENHO', 6, 'rx7900gre.jpg', 'Placa AMD de alto desempenho, ideal para jogos em 4K com ótimo custo-benefício.');
+INSERT INTO placaDeVideo (nome, preco, id_especificacao_tecnica, id_fabricante, categoria, estoque, nomeImagem, descricao) VALUES ('Teste', 0.50, 21, 11, 'ALTO_DESEMPENHO', 6, 'teste.jpg', 'Placa de teste com especificações experimentais para validação.');
 
 -- Usuarios
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
@@ -89,31 +89,31 @@ INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('testeete', 'testtee@email.com', 'teste123', 'aQu9iDxdP/UCaZL+pAjhK0OTAGBBCb+WHXaCfyRnK20cuQARzBRTYhx8/x3iTU4mk7RZZgclleVkk3VE9h/2sA==', 'USER', '01234567890');
 -- senha: jpuser
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Pedro Almeida', 'pedro@email.com', 'pedro', 'XUv4J7Kz9PwQmRnVpYsWt2x5z8BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '11122233344');
+('Pedro Almeida', 'pedro@email.com', 'pedro', 'z04+sUjvFC8AdjQmdgcyA4u4sNRKz5ZpEGxpolZHPFd/C96NasFTKw8wcUDH1Nv6be+2NwR3uP4oqTlG1Fze1Q==', 'USER', '11122233344');
 -- senha: pedro123
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Fernanda Lima', 'fernanda@email.com', 'fernanda', 'YhV5K8L0aQxSnWt3y6z9BvCdEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '22233344455');
+('Fernanda Lima', 'fernanda@email.com', 'fernanda', 'TQITy/5Ybn6skn3Nl2iF4Q5vF1Y2+5yn3YKvThjQfpFIHd1O1sFitYpbRSM9SXYEF6lo4rFB0hQ/4Tq+ut0BPQ==', 'USER', '22233344455');
 -- senha: fernanda456
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Ricardo Oliveira', 'ricardo@email.com', 'ricardo', 'ZiW6L9M1bRyToXu4a7c0DvEfGhIjKlMnOp0qRsTuVwXyZ1A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '33344455566');
+('Ricardo Oliveira', 'ricardo@email.com', 'ricardo', '5HRzXG+dGfueZwzzdDYyNsbdNSTBaZgJB7V9Kard3sxHPhN+O1YSg7LaPhhJeD3nFu0EZtHsWG4qonoTCRl80g==', 'USER', '33344455566');
 -- senha: ricardo789
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Camila Santos', 'camila@email.com', 'camila', 'AjX7M0N2cSzUpYv5b8d1EwFgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '44455566677');
+('Camila Santos', 'camila@email.com', 'camila', 'DC76wfiNZ9NPMciSUzRld7z86vVKiQj+iRgZD1XGECWQ/Z0/BiQiSxhC436rA2CpzRpT+qUAD/3ThGpaWDDhmA==', 'USER', '44455566677');
 -- senha: camila101
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Lucas Pereira', 'lucas@email.com', 'lucas', 'BkY8N1O3dTaVqZw6c9e2FxGgHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '55566677788');
+('Lucas Pereira', 'lucas@email.com', 'lucas', 'beUcr/N6WPpnB4JC/45bn9JwJ0p9740OFbqoE/KUxUkTolCP6izSvT6dQ1aJ+Bd6EHvEv0pPdskM9J8gg2crtw==', 'USER', '55566677788');
 -- senha: lucas202
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Juliana Costa', 'juliana@email.com', 'juliana', 'ClZ9O2P4eUbWrAx7d0f3GyHhIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '66677788899');
+('Juliana Costa', 'juliana@email.com', 'juliana', '+j0wzVsCkQRvc+xYtIJqYJ1eyvaNPvKhyyHGsQU41A6cFn+QBmtLxFB4ol/tU1qh53gAEf7Jjxed+JyxdXqs5Q==', 'USER', '66677788899');
 -- senha: juliana303
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Marcos Ribeiro', 'marcos@email.com', 'marcos', 'Dm0P3Q5fVcXsBy8e1g4HzIiJlKmNoPq0rStUvXwYyZ2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8', 'USER', '77788899900');
+('Marcos Ribeiro', 'marcos@email.com', 'marcos', 'NlRh7MLnPv67ffbKfjLi3rq3tDu0rNnsjU0GTGwd/lb0kXz3hj+DS6wH3We9pv5RLQ4UVZ/cDYM3FSrmhOV/eQ==', 'USER', '77788899900');
 -- senha: marcos404
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Patricia Alves', 'patricia@email.com', 'patricia', 'En1Q4R6gWdYtCz9f2h5I0JjKlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '88899900011');
+('Patricia Alves', 'patricia@email.com', 'patricia', '2dvD1BaUp0NCOK0QKTAJ+dsTTDDsp5FouXwVcGR2btCTGWEh7P53VZ+7vem7TThtk3cqOQQWPJxRd9i+WYNFDQ==', 'USER', '88899900011');
 -- senha: patricia505
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
-('Gustavo Ferreira', 'gustavo@email.com', 'gustavo', 'Fo2R5S7hXeZuD0g3i6J1KkLlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '99900011122');
+('Gustavo Ferreira', 'gustavo@email.com', 'gustavo', 'dnLOya4R2ySLFMJgUygdw35mJEKMi+Ap3omS+1Vr4LE5XSEk8PiUfJNE90ACbJOJ74rweyBl0VihZdbyWZgFyg==', 'USER', '99900011122');
 -- senha: gustavo606
 INSERT INTO usuario (nome, email, login, senha, perfil, cpf) VALUES
 ('Isabela Martins', 'isabela@email.com', 'isabela', 'Gp3S6T8iYfAvE1h4j7K2LlMmNnPoQr1sTuVwXxYyZ3A4B5C6D7E8F9G0H1I2J3K4L5M6N7O8P9Q0R1S2T3U4V5W6X7Y8Z9', 'USER', '00011122233');
@@ -318,6 +318,16 @@ INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (17, 13);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (18, 14);
 INSERT INTO usuario_endereco (id_usuario, id_endereco) VALUES (19, 15);
 
--- pedidos
-INSERT INTO pedido (id_usuario, status, valorTotal, id_pagamento, dataPedido)
-VALUES (8, 'AGUARDANDO_PAGAMENTO', 4999.98, 1, NOW());
+INSERT INTO pedido (id_usuario, status, valorTotal, dataPedido)
+VALUES (8, 'AGUARDANDO_PAGAMENTO', 4999.98, NOW());
+INSERT INTO pedido (id_usuario, status, valorTotal, dataPedido) VALUES
+(1, 'PAGO', 2499.99, '2025-06-01 10:00:00'), -- João Silva buying RTX 3060
+(2, 'ENVIADO', 2899.90, '2025-06-02 14:30:00'), -- Maria Souza buying RX 6700 XT
+(3, 'ENTREGUE', 14999.90, '2025-06-03 09:15:00'), -- Admin Sistema buying RTX 4090
+(4, 'AGUARDANDO_PAGAMENTO', 2199.00, '2025-06-04 16:45:00'), -- Carlos Oliveira buying Arc A770
+(5, 'CANCELADO', 5999.99, '2025-06-05 11:20:00'), -- Ana Santos buying RTX 4070 Ti
+(6, 'PAGO', 1299.90, '2025-06-06 13:10:00'), -- Teste Telefones buying GTX 1660 Super
+(10, 'ENTREGUE', 8999.99, '2025-06-07 08:30:00'), -- testeete buying RTX 3080 Ti
+(12, 'PAGO', 999.90, '2025-06-07 12:00:00'), -- Fernanda Lima buying RX 580
+(15, 'ENVIADO', 3499.90, '2025-06-07 15:40:00'), -- Lucas Pereira buying RTX 4060 Ti
+(20, 'AGUARDANDO_PAGAMENTO', 18999.90, '2025-06-07 18:25:00'); -- Isabela Martins buying RTX 5000 ADA

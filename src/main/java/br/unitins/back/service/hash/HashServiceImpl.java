@@ -40,17 +40,34 @@ public class HashServiceImpl implements HashService {
         Scanner scanner = new Scanner(System.in);
 
         HashService service = new HashServiceImpl();
-        System.out.println(service.getHashSenha("123"));
-        System.out.println(service.getHashSenha("111"));
-        System.out.println(service.getHashSenha("222"));
-        System.out.println(service.getHashSenha("333"));
-        System.out.println(service.getHashSenha("444"));
-        System.out.println(service.getHashSenha("555"));
-        System.out.println(service.getHashSenha("666"));
-        System.out.println(service.getHashSenha("jpuser"));
+        System.out.println(service.getHashSenha("pedro123"));
         System.out.println();
-        System.out.println("Insira a senha: ");
-        String senha = scanner.nextLine();
-        System.out.println(service.getHashSenha(senha));
+        System.out.println(service.getHashSenha("fernanda456"));
+        System.out.println();
+        System.out.println(service.getHashSenha("ricardo789"));
+        System.out.println();
+        System.out.println(service.getHashSenha("camila101"));
+        System.out.println();
+        System.out.println(service.getHashSenha("lucas202"));
+        System.out.println();
+        System.out.println(service.getHashSenha("juliana303"));
+        System.out.println();
+        System.out.println(service.getHashSenha("marcos404"));
+        System.out.println();
+        System.out.println(service.getHashSenha("patricia505"));
+        System.out.println();
+        System.out.println(service.getHashSenha("gustavo606"));
+        System.out.println();
+        System.out.println(service.getHashSenha("isabela707"));
+        System.out.println();
+        System.out.println(service.getHashSenha("roberto808"));
+        System.out.println();
+        System.out.println(service.getHashSenha("felipe010"));
+        System.out.println();
+        System.out.println(service.getHashSenha("tatiane111"));
+        System.out.println();
+        System.out.println(service.getHashSenha("rodrigo222"));
+        System.out.println();
+    
     }
 }

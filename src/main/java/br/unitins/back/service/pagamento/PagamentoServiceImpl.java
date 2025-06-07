@@ -3,6 +3,7 @@ package br.unitins.back.service.pagamento;
 import org.jboss.logging.Logger;
 
 import br.unitins.back.dto.request.pagamento.GooglePayTokenDTO;
+import br.unitins.back.dto.request.pagamento.PixDTO;
 import br.unitins.back.dto.response.PagamentoResponseDTO;
 import br.unitins.back.model.pagamento.Pagamento;
 import br.unitins.back.model.pagamento.Pix;
@@ -59,5 +60,33 @@ public class PagamentoServiceImpl implements PagamentoService {
 
         return PagamentoResponseDTO.valueOf(pagamento);
     }
+
+    @Override
+@Transactional
+public PagamentoResponseDTO processarPagamentoPix(PixDTO dto) {
+    logger.infof("Processando pagamento via PIX para o pedido %d", dto.getPedidoId());
+
+    Pedido pedido = pedidoRepository.findById(dto.getPedidoId());
+    if (pedido == null) {
+        throw new RuntimeException("Pedido não encontrado: " + dto.getPedidoId());
+    }
+
+    if (!"PIX".equalsIgnoreCase(dto.getMetodo())) {
+        throw new RuntimeException("Método de pagamento não suportado.");
+    }
+
+    Pix pagamento = new Pix();
+    pagamento.setValorPago(java.math.BigDecimal.valueOf(dto.getValor())); // 👈 conversão segura
+    pagamento.setStatus(StatusPagamento.APROVADO);
+    pagamento.setPedido(pedido);
+
+    // Simular geração de chave Pix e QR Code
+    pagamento.setChavePix("pix@empresa.com");
+    pagamento.setQrCodeBase64("data:image/png;base64,FAKE_QRCODE");
+
+    pagamentoRepository.persist(pagamento);
+
+    return PagamentoResponseDTO.valueOf(pagamento);
+}
 
 }

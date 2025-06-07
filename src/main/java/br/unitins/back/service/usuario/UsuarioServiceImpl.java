@@ -283,9 +283,11 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new NotFoundException("Usuário não encontrado");
         }
         Telefone telefone = new Telefone(telefoneDTO);
+        // Persist the telefone entity explicitly to ensure ID generation
+        repository.getEntityManager().persist(telefone);
         usuario.getTelefones().add(telefone);
         repository.persist(usuario);
-        LOGGER.infof("Telefone adicionado com sucesso para usuário ID: %d", id);
+        LOGGER.infof("Telefone adicionado com sucesso para usuário ID: %d, Telefone ID: %d", id, telefone.getId());
         return UsuarioResponseDTO.valueOf(usuario);
     }
 

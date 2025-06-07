@@ -12,12 +12,17 @@ public record PagamentoResponseDTO(
         LocalDateTime dataPagamento,
         BigDecimal valorPago,
         StatusPagamento status,
-        String chavePix) {
+        String chavePix,
+        String qrCodeBase64 // ✅ novo campo
+) {
 
     public static PagamentoResponseDTO valueOf(Pagamento pagamento) {
         String chavePix = null;
-        if (pagamento instanceof Pix) {
-            chavePix = ((Pix) pagamento).getChavePix();
+        String qrCodeBase64 = null;
+
+        if (pagamento instanceof Pix pix) {
+            chavePix = pix.getChavePix();
+            qrCodeBase64 = pix.getQrCodeBase64(); // ✅ novo campo
         }
 
         return new PagamentoResponseDTO(
@@ -25,7 +30,8 @@ public record PagamentoResponseDTO(
                 pagamento.getDataPagamento(),
                 pagamento.getValorPago(),
                 pagamento.getStatus(),
-                chavePix
+                chavePix,
+                qrCodeBase64
         );
     }
 }

@@ -1,6 +1,7 @@
 package br.unitins.back.resource;
 
 import br.unitins.back.dto.request.pagamento.GooglePayTokenDTO;
+import br.unitins.back.dto.request.pagamento.PixDTO;
 import br.unitins.back.dto.response.PagamentoResponseDTO;
 import br.unitins.back.service.pagamento.PagamentoService;
 import jakarta.inject.Inject;
@@ -43,5 +44,17 @@ public class PagamentoResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
+
+
+    @POST
+@Path("/pix")
+public Response processarPix(@Valid PixDTO dto) {
+    try {
+        PagamentoResponseDTO response = pagamentoService.processarPagamentoPix(dto);
+        return Response.ok(response).build();
+    } catch (RuntimeException e) {
+        return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    }
+}
 
 }
