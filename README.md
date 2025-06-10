@@ -1,78 +1,282 @@
-# code-with-quarkus
+# 🚀 Backend - Placas de Vídeo API
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+API REST desenvolvida em Quarkus para gerenciamento de e-commerce de placas de vídeo
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## 🎯 Sobre o Projeto
 
-## Running the application in dev mode
+Este é o **backend** do sistema Nexus GPU, uma API REST robusta desenvolvida com **Quarkus** para fornecer todos os serviços necessários para o e-commerce de placas de vídeo. A API oferece endpoints para gerenciamento de produtos, usuários, pedidos e todas as funcionalidades do sistema.
 
-You can run your application in dev mode that enables live coding using:
+### 🔗 **Frontend Relacionado**
+Este backend funciona em conjunto com o frontend Angular:
+👉 **[Frontend - Nexus GPU](https://github.com/JoaoPOPaulino/PlacaDeVideo)**
 
-```shell script
-./mvnw quarkus:dev
+## ✨ Funcionalidades da API
+
+- 🛍️ **Gestão de Produtos** - CRUD completo de placas de vídeo
+- 👤 **Gerenciamento de Usuários** - Autenticação e perfis
+- 🛒 **Sistema de Pedidos** - Processamento de compras
+- 📊 **Relatórios** - Estatísticas e dados analíticos
+- 🔐 **Autenticação JWT** - Segurança e controle de acesso
+- 📱 **API RESTful** - Endpoints padronizados
+
+## 🛠️ Tecnologias Utilizadas
+
+- **[Quarkus](https://quarkus.io/)** - Framework Java supersônico e subatômico
+- **Java 17+** - Linguagem de programação
+- **PostgreSQL** - Banco de dados relacional
+- **Hibernate ORM** - Mapeamento objeto-relacional
+- **RESTEasy** - Framework REST
+- **Docker** - Containerização
+- **Maven** - Gerenciamento de dependências
+
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- **[Java 17+](https://adoptopenjdk.net/)** - JDK necessário
+- **[Maven 3.8+](https://maven.apache.org/)** - Gerenciador de dependências
+- **[Docker](https://www.docker.com/)** - Para containerização
+- **[PostgreSQL](https://www.postgresql.org/)** - Banco de dados
+
+### 🐘 **Configuração do PostgreSQL**
+
+Certifique-se de ter um banco de dados PostgreSQL rodando com as seguintes configurações:
+
+| Parâmetro | Valor |
+|-----------|-------|
+| **Nome do Banco** | `topicos1db` |
+| **Usuário** | `topicos1` |
+| **Senha** | `123456` |
+| **Host** | `localhost` |
+| **Porta** | `5432` |
+
+## 🚀 Como Executar o Projeto
+
+### 1. Clone o Repositório
+```bash
+git clone https://github.com/JoaoPOPaulino/back-placa-de-video.git
+cd back-placa-de-video
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+### 2. Configure o Banco de Dados
+```sql
+-- Execute no PostgreSQL
+CREATE DATABASE topicos1db;
+CREATE USER topicos1 WITH PASSWORD '123456';
+GRANT ALL PRIVILEGES ON DATABASE topicos1db TO topicos1;
+```
 
-## Packaging and running the application
+### 3. Inicie o Docker
+```bash
+# Certifique-se de que o Docker está rodando
+docker --version
 
-The application can be packaged using:
+# Se necessário, inicie o Docker Desktop ou o serviço
+sudo systemctl start docker  # Linux
+# ou abra o Docker Desktop no Windows/Mac
+```
 
-```shell script
+### 4. Execute o Projeto
+
+#### 🔥 **Modo Desenvolvimento (Dev Mode)**
+```bash
+./mvnw compile quarkus:dev
+```
+ou
+```bash
+mvn compile quarkus:dev
+```
+
+#### 📦 **Modo Produção**
+```bash
+# Build da aplicação
 ./mvnw package
+
+# Execução
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+#### 🐳 **Com Docker**
+```bash
+# Build da imagem Docker
+./mvnw package -Dquarkus.container-image.build=true
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+# Executar container
+docker run -i --rm -p 8080:8080 \
+  -e QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://host.docker.internal:5432/topicos1db \
+  -e QUARKUS_DATASOURCE_USERNAME=topicos1 \
+  -e QUARKUS_DATASOURCE_PASSWORD=123456 \
+  [nome-da-imagem]
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+### 5. Verifique se Está Funcionando
+```bash
+# Teste básico da API
+curl http://localhost:8080/health
 
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
+# Swagger UI (se habilitado)
+# Acesse: http://localhost:8080/q/swagger-ui
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+## 📁 Estrutura do Projeto
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
+back-placa-de-video/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/seu/pacote/
+│   │   │       ├── entity/        # Entidades JPA
+│   │   │       ├── resource/      # Controllers REST
+│   │   │       ├── service/       # Lógica de negócio
+│   │   │       ├── repository/    # Repositórios de dados
+│   │   │       └── dto/           # Data Transfer Objects
+│   │   └── resources/
+│   │       ├── application.properties  # Configurações
+│   │       └── import.sql             # Dados iniciais
+│   └── test/                          # Testes
+├── pom.xml                           # Dependências Maven
+└── Dockerfile                       # Container Docker
 ```
 
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
+## ⚙️ Configuração
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+### 📄 **application.properties**
+```properties
+# Configuração do banco de dados
+quarkus.datasource.db-kind=postgresql
+quarkus.datasource.username=topicos1
+quarkus.datasource.password=123456
+quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/topicos1db
 
-## Related Guides
+# Hibernate
+quarkus.hibernate-orm.database.generation=drop-and-create
+quarkus.hibernate-orm.log.sql=true
 
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
+# Porta da aplicação
+quarkus.http.port=8080
 
-## Provided Code
+# CORS (para desenvolvimento)
+quarkus.http.cors=true
+quarkus.http.cors.origins=http://localhost:4200
+```
 
-### Hibernate ORM
+## 🔌 Principais Endpoints
 
-Create your first JPA entity
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/placas` | Lista todas as placas de vídeo |
+| `GET` | `/api/placas/{id}` | Busca placa por ID |
+| `POST` | `/api/placas` | Cria nova placa |
+| `PUT` | `/api/placas/{id}` | Atualiza placa |
+| `DELETE` | `/api/placas/{id}` | Remove placa |
+| `GET` | `/api/usuarios` | Lista usuários |
+| `POST` | `/api/auth/login` | Autenticação |
 
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+## 🧪 Executando Testes
 
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+```bash
+# Testes unitários
+./mvnw test
 
+# Testes de integração
+./mvnw verify
 
-### RESTEasy JAX-RS
+# Testes com relatório
+./mvnw test jacoco:report
+```
 
-Easily start your RESTful Web Services
+## 🚀 Deploy e Build
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+### **Build Nativo (GraalVM)**
+```bash
+# Instalar GraalVM (opcional)
+./mvnw package -Pnative
+
+# Executar binário nativo
+./target/back-placa-de-video-1.0.0-SNAPSHOT-runner
+```
+
+### **Docker Build**
+```bash
+# Build da imagem
+./mvnw package -Dquarkus.container-image.build=true
+
+# Push para registry (se configurado)
+./mvnw package -Dquarkus.container-image.push=true
+```
+
+## 🔧 Scripts Úteis
+
+```bash
+# Limpeza e rebuild completo
+./mvnw clean compile
+
+# Modo desenvolvimento com debug
+./mvnw compile quarkus:dev -Ddebug=5005
+
+# Profile de desenvolvimento
+./mvnw compile quarkus:dev -Dquarkus.profile=dev
+
+# Verificar dependências
+./mvnw dependency:tree
+```
+
+## 📊 Monitoramento e Health Check
+
+```bash
+# Health check
+curl http://localhost:8080/q/health
+
+# Métricas (se habilitado)
+curl http://localhost:8080/q/metrics
+
+# OpenAPI/Swagger
+curl http://localhost:8080/q/openapi
+```
+
+## 🐛 Troubleshooting
+
+### **Problemas Comuns:**
+
+**❌ Erro de Conexão com Banco**
+```bash
+# Verifique se o PostgreSQL está rodando
+sudo systemctl status postgresql
+
+# Teste a conexão
+psql -h localhost -U topicos1 -d topicos1db
+```
+
+**❌ Porta 8080 em Uso**
+```bash
+# Encontre o processo usando a porta
+lsof -i :8080
+
+# Mate o processo ou use outra porta
+./mvnw compile quarkus:dev -Dquarkus.http.port=8081
+```
+
+**❌ Docker não Iniciado**
+```bash
+# Inicie o Docker
+sudo systemctl start docker
+
+# Verifique o status
+docker ps
+```
+
+## 👥 Equipe de Desenvolvimento
+
+- **João Pedro de Oliveira** - [@JoaoPOPaulino](https://github.com/JoaoPOPaulino)
+- **Luiz Cláudio** - Desenvolvedor
+
+## 🎓 Contexto Acadêmico
+
+- **Instituição:** UNITINS (Universidade Estadual do Tocantins)
+- **Disciplina:** Tópicos de Programação II
+- **Professor Orientador:** Jânio Junior
+
+## 📄 Licença
+
+Este projeto é exclusivamente **acadêmico** e foi desenvolvido para fins **educacionais**.
